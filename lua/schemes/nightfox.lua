@@ -1,17 +1,10 @@
 -- https://github.com/EdenEast/nightfox.nvim
 
-local nightfox_ok, nightfox = pcall(require, 'nightfox')
-if not nightfox_ok then
-    return
-end
+local nightfox = require 'nightfox'
 
 nightfox.setup {
     options = {
-        compile_path = vim.fn.stdpath 'cache' .. '/nightfox',
-        compile_file_suffix = '_compiled',
         transparent = true,
-        terminal_colors = true,
-        dim_inactive = false,
         styles = {
             comments = 'bold', -- Value is any valid attr-list value `:help attr-list`
             conditionals = 'bold',
@@ -23,11 +16,6 @@ nightfox.setup {
             strings = 'NONE',
             types = 'NONE',
             variables = 'NONE',
-        },
-        inverse = {
-            match_paren = false,
-            visual = false,
-            search = false,
         },
         modules = {
             cmp = true,
@@ -51,8 +39,6 @@ nightfox.setup {
             bg1 = '#1a182c',
         },
     },
-    specs = {},
-    groups = {},
 }
 
 vim.cmd 'colorscheme duskfox' -- nightfox|dayfox|dawnfox|duskfox|nordfox|terafox

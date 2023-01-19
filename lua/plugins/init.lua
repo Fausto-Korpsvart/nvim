@@ -1,68 +1,69 @@
 return {
-    { 'nvim-lua/plenary.nvim', module = true },
+    { -- https://github.com/nvim-lua/plenary.nvim
 
-    { -- Visual Multi<[[[
+        'nvim-lua/plenary.nvim',
+        module = true,
+    },
+    { -- https://github.com/mg979/vim-visual-multi
         'mg979/vim-visual-multi',
         branch = 'master',
         event = 'BufRead',
         config = function()
-            -- https://github.com/mg979/vim-visual-multi
+            vim.cmd [[
+                let g:VM_maps                         = {}
+                let g:VM_leader                       = ','
+                let g:VM_maps['Motion']               = ',,'
+                let g:VM_default_mappings             = 0
+                let g:VM_mouse_mappings               = 1
+                let g:VM_maps['Exit']                 = 'q'
+                let g:VM_maps['Find Under']           = '<C-n>'
+                let g:VM_maps['Find Subword Under']   = '<C-N>'
+                let g:VM_maps['Add Cursor Down']      = '<C-Down>'
+                let g:VM_maps['Add Cursor Up']        = '<C-Up>'
+                let g:VM_maps['Switch Mode']          = '<Tab>'
+                let g:VM_maps['Undo']                 = '<C-u>'
+                let g:VM_maps['Redo']                 = '<C-r>'
+                let g:VM_maps['Find Next']            = 'n'
+                let g:VM_maps['Find Prev']            = 'p'
+                let g:VM_maps['Goto Next']            = ']'
+                let g:VM_maps['Goto Prev']            = '['
+                let g:VM_maps['Seek Next']            = '<C-f>'
+                let g:VM_maps['Seek Prev']            = '<C-b>'
+                let g:VM_maps["Align"]                = 'A'
+                let g:VM_maps["Numbers"]              = 'nu'
+                let g:VM_maps["Numbers Append"]       = 'NU'
+                let g:VM_maps['Skip Region']          = 'sr'
+                let g:VM_maps['Remove Region']        = 'rr'
+                let g:VM_maps['Invert Direction']     = 'o'
+                let g:VM_maps["Case Setting"]         = 'cs'
+                let g:VM_maps['Find Operator']        = 'm'
+                let g:VM_maps['Surround']             = 'S'
+                let g:VM_maps['Replace Pattern']      = 'R'
+                let g:VM_maps["Duplicate"]            = 'D'
+                let g:VM_maps["Merge Regions"]        = 'mr'
+                let g:VM_maps["Split Regions"]        = 'sr'
+                let g:VM_maps["Remove Last Region"]   = 'qr'
+                let g:VM_maps["Visual Subtract"]      = 'vs'
+                let g:VM_maps["Case Conversion Menu"] = 'CC'
+                let g:VM_maps["Search Menu"]          = 'SM'
+                let g:VM_maps["Zero Numbers"]         = '0n'
+                let g:VM_maps["Zero Numbers Append"]  = '0N'
+                let g:VM_maps["Shrink"]               = "_"
+                let g:VM_maps["Enlarge"]              = "+"
+                let g:VM_maps["Toggle Block"]         = 'tb'
+                let g:VM_maps["Toggle Single Region"] = '<CR>'
+                let g:VM_maps["Toggle Multiline"]     = 'ML'
 
-            local g = vim.g
-
-            g.VM_maps = {}
-            g.VM_leader = ','
-            g.VM_maps['Motion'] = ',,'
-            g.VM_default_mappings = 0
-            g.VM_mouse_mappings = 1
-            g.VM_maps['Exit'] = 'q'
-            g.VM_maps['Find Under'] = '<C-n>'
-            g.VM_maps['Find Subword Under'] = '<C-N>'
-            g.VM_maps['Add Cursor Down'] = '<C-Down>'
-            g.VM_maps['Add Cursor Up'] = '<C-Up>'
-            g.VM_maps['Switch Mode'] = '<Tab>'
-            g.VM_maps['Undo'] = '<C-u>'
-            g.VM_maps['Redo'] = '<C-r>'
-            g.VM_maps['Find Next'] = 'n'
-            g.VM_maps['Find Prev'] = 'p'
-            g.VM_maps['Goto Next'] = ']'
-            g.VM_maps['Goto Prev'] = '['
-            g.VM_maps['Seek Next'] = '<C-f>'
-            g.VM_maps['Seek Prev'] = '<C-b>'
-            g.VM_maps['Align'] = 'A'
-            g.VM_maps['Numbers'] = 'nu'
-            g.VM_maps['Numbers Append'] = 'NU'
-            g.VM_maps['Skip Region'] = 'sr'
-            g.VM_maps['Remove Region'] = 'rr'
-            g.VM_maps['Invert Direction'] = 'o'
-            g.VM_maps['Case Setting'] = 'cs'
-            g.VM_maps['Find Operator'] = 'm'
-            g.VM_maps['Surround'] = 'S'
-            g.VM_maps['Replace Pattern'] = 'R'
-            g.VM_maps['Duplicate'] = 'D'
-            g.VM_maps['Merge Regions'] = 'mr'
-            g.VM_maps['Split Regions'] = 'sr'
-            g.VM_maps['Remove Last Region'] = 'qr'
-            g.VM_maps['Visual Subtract'] = 'vs'
-            g.VM_maps['Case Conversion Menu'] = 'CC'
-            g.VM_maps['Search Menu'] = 'SM'
-            g.VM_maps['Zero Numbers'] = '0n'
-            g.VM_maps['Zero Numbers Append'] = '0N'
-            g.VM_maps['Shrink'] = '_'
-            g.VM_maps['Enlarge'] = '+'
-            g.VM_maps['Toggle Block'] = 'tb'
-            g.VM_maps['Toggle Single Region'] = '<CR>'
-            g.VM_maps['Toggle Multiline'] = 'ML'
-
-            -- Highlights
-            g.VM_Mono_hl = 'DiffText'
-            g.VM_Extend_hl = 'DiffAdd'
-            g.VM_Cursor_hl = 'Visual'
-            g.VM_Insert_hl = 'DiffChange'
-            g.VM_highlight_matches = 'hi! Search ctermfg=228 cterm=underline'
-            g.VM_highlight_matches = 'hi! link Search PmenuSel'
+                " Highlights
+                let g:VM_Mono_hl   = 'DiffText'
+                let g:VM_Extend_hl = 'DiffAdd'
+                let g:VM_Cursor_hl = 'Visual'
+                let g:VM_Insert_hl = 'DiffChange'
+                let g:VM_highlight_matches = 'hi! Search ctermfg=228 cterm=underline'
+                let g:VM_highlight_matches = 'hi! link Search PmenuSel'
+            ]]
         end,
-    }, -- ]]]>
+    },
 
     -- Colorschemes
     'catppuccin/nvim',

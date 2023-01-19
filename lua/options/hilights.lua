@@ -1,10 +1,9 @@
 local hl = vim.api.nvim_set_hl
 
 -- Neovim Core
--- vim.cmd [[hi! CursorLine gui=bold]]
+vim.cmd [[hi! CursorLine gui=bold]]
 hl(0, 'MsgArea',      { bg = 'none', bold = true, fg = '#89ddff' })
 hl(0, 'ModeMsg',      { bg = 'none', bold = true, fg = '#89ddff' })
-hl(0, 'CursorLine',   { bg = '#2d2a45', blend = 50, bold = true, })
 hl(0, 'CursorLineNr', { bg = 'none', bold = true, fg = '#ff9e64' })
 
 -- Changes Sign

@@ -1,7 +1,5 @@
 return {
-    -- Web Development
-    { -- Colorizer<[[[
-        -- https://github.com/NvChad/nvim-colorizer.lua (Maintained | Using)
+    { -- https://github.com/NvChad/nvim-colorizer.lua
         'NvChad/nvim-colorizer.lua',
         config = function()
             local colorizer = require 'colorizer'
@@ -26,15 +24,15 @@ return {
                 buftypes = {},
             }
         end,
-    }, -- ]]]>
-    { -- Emmet<[[[
+    },
+    { -- https://github.com/mattn/emmet-vim
         'mattn/emmet-vim',
         event = 'BufRead',
         config = function()
             vim.g.user_emmet_mode = 'a'
         end,
-    }, -- ]]]>
-    { -- Glow<[[[
+    },
+    { -- https://github.com/ellisonleao/glow.nvim
         'ellisonleao/glow.nvim',
         event = 'BufRead',
         config = function()
@@ -46,9 +44,8 @@ return {
                 height = 150,
             }
         end,
-    }, -- ]]]>
-    { -- Live Server<[[[
-        -- https://github.com/aurum77/live-server.nvim
+    },
+    { -- https://github.com/aurum77/live-server.nvim
         'aurum77/live-server.nvim',
         config = function()
             require('live_server.util').install()
@@ -60,21 +57,19 @@ return {
             }
         end,
         cmd = { 'LiveServer', 'LiveServerStart', 'LiveServerStop' },
-    }, -- ]]]>
-    { -- Markdown Preview<[[[
+    },
+    { -- https://github.com/iamcco/markdown-preview.nvim
         'iamcco/markdown-preview.nvim',
         build = function()
             vim.fn['mkdp#util#install']()
         end,
         ft = 'markdown',
-    }, -- ]]]>
-    { -- Prettier<[[[
+    },
+    { -- https://github.com/MunifTanjim/prettier.nvim
+        -- https://prettier.io/docs/en/options.html
         'MunifTanjim/prettier.nvim',
         event = 'BufRead',
         config = function()
-            -- https://github.com/MunifTanjim/prettier.nvim
-            -- https://prettier.io/docs/en/options.html
-
             local prettier_ok, prettier = pcall(require, 'prettier')
             if not prettier_ok then
                 return
@@ -118,5 +113,5 @@ return {
                 },
             }
         end,
-    },-- ]]]>
+    },
 }

@@ -1,5 +1,4 @@
 return {
-    -- User Interface
     { -- Alpha<[[[
         -- https://github.com/goolord/alpha-nvim
         'goolord/alpha-nvim',
@@ -65,7 +64,7 @@ return {
                 local cd_cmd = (autocd and ' | cd %:p:h' or '')
 
                 local file_button_el =
-                dashboard.button(sc, ico_txt .. short_fn, '<cmd>e ' .. fn .. cd_cmd .. ' <CR>')
+                    dashboard.button(sc, ico_txt .. short_fn, '<cmd>e ' .. fn .. cd_cmd .. ' <CR>')
 
                 local fn_start = short_fn:match '.*[/\\]'
                 if fn_start ~= nil then
@@ -287,100 +286,15 @@ return {
         end,
     }, -- ]]]>
     { -- Dressing<[[[
+        -- https://github.com/stevearc/dressing.nvim
         'stevearc/dressing.nvim',
         event = 'VeryLazy',
         config = function()
             require('dressing').setup {}
         end,
     }, -- ]]]>
-    { -- Fidget<[[[
-        'j-hui/fidget.nvim',
-        event = 'BufRead',
-        config = function()
-            require('fidget').setup {
-                text = {
-                    spinner = 'dots_snake',
-                    done = '',
-                },
-                align = {
-                    bottom = false,
-                },
-                window = {
-                    blend = 0,
-                },
-            }
-        end,
-    }, -- ]]]>
-    { -- Indentline<[[[
-        -- https://github.com/lukas-reineke/indent-blankline.nvim
-        'lukas-reineke/indent-blankline.nvim',
-        event = 'BufRead',
-        dependencies = {
-            {
-                'echasnovski/mini.indentscope',
-                config = function()
-                    require('mini.indentscope').setup {
-                        options = { try_as_border = true },
-                        symbol = '▏',
-                    }
-                end,
-            },
-        },
-        config = function()
-            local indentline = require 'indent_blankline'
-
-            local hl = vim.api.nvim_set_hl
-            local hi_colors = { enable_colors = true }
-            local function hi_lines()
-                if hi_colors.enable_colors then
-                    hl(0, 'IndentBlanklineIndent1', { fg = '#E06C75', blend = 0 })
-                    hl(0, 'IndentBlanklineIndent2', { fg = '#E5C07B', blend = 0 })
-                    hl(0, 'IndentBlanklineIndent3', { fg = '#98C379', blend = 0 })
-                    hl(0, 'IndentBlanklineIndent4', { fg = '#56B6C2', blend = 0 })
-                    hl(0, 'IndentBlanklineIndent5', { fg = '#61AFEF', blend = 0 })
-                    hl(0, 'IndentBlanklineIndent6', { fg = '#C678DD', blend = 0 })
-                    return {
-                        'IndentBlanklineIndent1',
-                        'IndentBlanklineIndent2',
-                        'IndentBlanklineIndent3',
-                        'IndentBlanklineIndent4',
-                        'IndentBlanklineIndent5',
-                        'IndentBlanklineIndent6',
-                    }
-                else
-                    return
-                end
-            end
-
-            indentline.setup {
-                char_list = { '', '', '', '' },
-                char_highlight_list = hi_lines(),
-                use_treesitter = true,
-                show_current_context = false,
-                show_current_context_start = false,
-                indent_blankline_indent_level = 4,
-                buftype_exclude = {
-                    'nofile',
-                    'quickfix',
-                    'telescope',
-                    'terminal',
-                },
-                filetype_exclude = {
-                    'alpha',
-                    'git',
-                    'gitcommit',
-                    'help',
-                    'log',
-                    'neogitstatus',
-                    'packer',
-                    'TelescopePrompt',
-                    'Trouble',
-                    'vista',
-                },
-            }
-        end,
-    }, -- ]]]>
     { -- legendary<[[[
+        -- https://github.com/mrjones2014/legendary.nvim
         'mrjones2014/legendary.nvim',
         event = 'BufRead',
         config = function()
@@ -1275,11 +1189,10 @@ return {
         end,
     }, -- ]]]>
     { -- Noice<[[[
+        -- https://github.com/folke/noice.nvim
         'folke/noice.nvim',
         event = 'VimEnter',
         config = function()
-            -- https://github.com/folke/noice.nvim
-
             local noice = require 'noice'
 
             noice.setup {
@@ -1315,24 +1228,8 @@ return {
             }
         end,
     }, -- ]]]>
-    { -- Notifier<[[[
-        'vigoux/notifier.nvim',
-        config = function()
-            require('notifier').setup {
-                components = {
-                    'nvim',
-                    'lsp',
-                },
-                notify = {
-                    clear_time = 9999,
-                    min_level = vim.log.levels.INFO,
-                },
-                component_name_recall = false,
-                zindex = 50,
-            }
-        end,
-    }, -- ]]]>
     { -- NUI<[[[
+        -- https://github.com/MunifTanjim/nui.nvim
         'MunifTanjim/nui.nvim',
         event = 'VeryLazy',
     }, -- ]]]>
@@ -1350,12 +1247,11 @@ return {
         end,
     }, -- ]]]>
     { -- Telescope<[[[
+        -- https://github.com/nvim-telescope/telescope.nvim
         'nvim-telescope/telescope.nvim',
         module = true,
         cmd = 'Telescope',
         config = function()
-            -- https://github.com/nvim-telescope/telescope.nvim
-
             local telescope = require 'telescope'
             local actions = require 'telescope.actions'
 
@@ -1414,6 +1310,7 @@ return {
         end,
     }, -- ]]]>
     { -- Todo Comments<[[[
+        -- https://github.com/folke/todo-comments.nvim
         'folke/todo-comments.nvim',
         event = 'BufRead',
         config = function()
@@ -1467,11 +1364,10 @@ return {
         end,
     }, -- ]]]>
     { -- Undo Tree<[[[
+        -- https://github.com/mbbill/undotree
         'mbbill/undotree',
         event = 'BufRead',
         config = function()
-            -- https://github.com/mbbill/undotree
-
             vim.g.undotree_RelativeTampstamp = 1
             vim.g.undotree_ShortIndocators = 1
             vim.g.undotree_HelpLine = 1
@@ -1490,6 +1386,7 @@ return {
         end,
     }, -- ]]]>
     { -- Web Dev Icons<[[[
+        -- https://github.com/nvim-tree/nvim-web-devicons
         'kyazdani42/nvim-web-devicons',
         event = 'BufRead',
     }, -- ]]]>

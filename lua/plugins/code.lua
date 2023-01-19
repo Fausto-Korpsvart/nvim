@@ -1,6 +1,5 @@
 return {
-    -- Code Utilities
-    {
+    { -- https://github.com/haringsrob/nvim_context_vt
         'haringsrob/nvim_context_vt',
         event = 'BufRead',
         config = function()
@@ -12,12 +11,10 @@ return {
             }
         end,
     },
-    {
+    { -- https://github.com/editorconfig/editorconfig-vim
         'editorconfig/editorconfig-vim',
         event = 'BufRead',
         config = function()
-            -- https://github.com/editorconfig/editorconfig-vim
-
             local g = vim.g
             local b = vim.b
 
@@ -30,15 +27,100 @@ return {
             g.EditorConfig_verbose = 0
         end,
     },
-    {
+    { -- https://github.com/j-hui/fidget.nvim
+        'j-hui/fidget.nvim',
+        event = 'BufRead',
+        config = function()
+            require('fidget').setup {
+                text = {
+                    spinner = 'dots_snake',
+                    done = '',
+                },
+                align = {
+                    bottom = false,
+                },
+                window = {
+                    blend = 0,
+                },
+            }
+        end,
+    },
+    { -- https://github.com/phaazon/hop.nvim
         'phaazon/hop.nvim',
         event = 'BufRead',
         config = function()
             require('hop').setup()
         end,
     },
-    {
-        -- https://github.com/phaazon/mind.nvim/
+    { -- https://github.com/lukas-reineke/indent-blankline.nvim
+        'lukas-reineke/indent-blankline.nvim',
+        event = 'BufRead',
+        dependencies = {
+            {
+                'echasnovski/mini.indentscope',
+                config = function()
+                    require('mini.indentscope').setup {
+                        options = { try_as_border = true },
+                        symbol = '▏',
+                    }
+                end,
+            },
+        },
+        config = function()
+            local indentline = require 'indent_blankline'
+
+            local hl = vim.api.nvim_set_hl
+            local hi_colors = { enable_colors = true }
+            local function hi_lines()
+                if hi_colors.enable_colors then
+                    hl(0, 'IndentBlanklineIndent1', { fg = '#E06C75', blend = 0 })
+                    hl(0, 'IndentBlanklineIndent2', { fg = '#E5C07B', blend = 0 })
+                    hl(0, 'IndentBlanklineIndent3', { fg = '#98C379', blend = 0 })
+                    hl(0, 'IndentBlanklineIndent4', { fg = '#56B6C2', blend = 0 })
+                    hl(0, 'IndentBlanklineIndent5', { fg = '#61AFEF', blend = 0 })
+                    hl(0, 'IndentBlanklineIndent6', { fg = '#C678DD', blend = 0 })
+                    return {
+                        'IndentBlanklineIndent1',
+                        'IndentBlanklineIndent2',
+                        'IndentBlanklineIndent3',
+                        'IndentBlanklineIndent4',
+                        'IndentBlanklineIndent5',
+                        'IndentBlanklineIndent6',
+                    }
+                else
+                    return
+                end
+            end
+
+            indentline.setup {
+                char_list = { '', '', '', '' },
+                char_highlight_list = hi_lines(),
+                use_treesitter = true,
+                show_current_context = false,
+                show_current_context_start = false,
+                indent_blankline_indent_level = 4,
+                buftype_exclude = {
+                    'nofile',
+                    'quickfix',
+                    'telescope',
+                    'terminal',
+                },
+                filetype_exclude = {
+                    'alpha',
+                    'git',
+                    'gitcommit',
+                    'help',
+                    'log',
+                    'neogitstatus',
+                    'packer',
+                    'TelescopePrompt',
+                    'Trouble',
+                    'vista',
+                },
+            }
+        end,
+    },
+    { -- https://github.com/phaazon/mind.nvim/
         'phaazon/mind.nvim',
         branch = 'v2.2',
         event = 'BufRead',
@@ -53,7 +135,24 @@ return {
             }
         end,
     },
-    {
+    { -- https://github.com/vigoux/notifier.nvim
+        'vigoux/notifier.nvim',
+        config = function()
+            require('notifier').setup {
+                components = {
+                    'nvim',
+                    'lsp',
+                },
+                notify = {
+                    clear_time = 9999,
+                    min_level = vim.log.levels.INFO,
+                },
+                component_name_recall = false,
+                zindex = 50,
+            }
+        end,
+    },
+    { -- https://github.com/epwalsh/obsidian.nvim
         'epwalsh/obsidian.nvim',
         event = 'BufRead',
         config = function()
@@ -65,16 +164,11 @@ return {
             }
         end,
     },
-    {
+    { -- https://github.com/nvim-pack/nvim-spectre
         'windwp/nvim-spectre',
         event = 'BufRead',
         config = function()
-            -- https://github.com/nvim-pack/nvim-spectre
-
-            local spectre_ok, spectre = pcall(require, 'spectre')
-            if not spectre_ok then
-                return
-            end
+            local spectre = require 'spectre'
 
             spectre.setup {
                 line_sep_start = '',
@@ -100,10 +194,10 @@ return {
             }
         end,
     },
-    {
+    { -- https://github.com/tpope/vim-surround
         'tpope/vim-surround',
     },
-    {
+    { -- https://github.com/folke/zen-mode.nvim
         'folke/zen-mode.nvim',
         config = function()
             require('zen-mode').setup {}

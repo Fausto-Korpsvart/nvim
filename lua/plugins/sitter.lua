@@ -1,5 +1,5 @@
 return {
-    -- Tree Sitter
+    -- https://github.com/nvim-treesitter/nvim-treesitter
 
     'nvim-treesitter/nvim-treesitter',
     module = true,
@@ -23,12 +23,7 @@ return {
     },
     build = ':TSUpdate',
     config = function()
-        -- https://github.com/nvim-treesitter/nvim-treesitter
-
-        local ts_configs_ok, ts_configs = pcall(require, 'nvim-treesitter.configs')
-        if not ts_configs_ok then
-            return
-        end
+        local ts_configs = require 'nvim-treesitter.configs'
 
         ts_configs.setup {
             ensure_installed = {
@@ -84,8 +79,5 @@ return {
                 disable = {},
             },
         }
-
-        -- local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-        -- parser_config.tsx.filetype_to_parsername = { 'javascript', 'typescript.tsx' }
     end,
 }

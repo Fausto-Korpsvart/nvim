@@ -96,7 +96,7 @@ autocmd('Filetype', {
 autocmd('FileType', {
     desc = 'Set indentation To 4 Spaces In Some Filetypes',
     group = general,
-    pattern = { 'c', 'cpp', 'py', 'java', 'cs' },
+    pattern = { 'c', 'cpp', 'py', 'java', 'cs', 'javascript' },
     callback = function()
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
@@ -127,6 +127,15 @@ autocmd('VimResized', {
     group = general,
     callback = function()
         vim.cmd 'wincmd ='
+    end,
+})
+
+autocmd('TermOpen', {
+    desc = 'Start TermMode When TermBuf Open.',
+    group = general,
+    callback = function()
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
     end,
 })
 
