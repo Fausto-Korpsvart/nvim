@@ -23,9 +23,7 @@ return {
     },
     build = ':TSUpdate',
     config = function()
-        local ts_configs = require 'nvim-treesitter.configs'
-
-        ts_configs.setup {
+        require('nvim-treesitter.configs').setup {
             ensure_installed = {
                 'html',
                 'help',

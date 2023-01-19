@@ -1,20 +1,18 @@
 -- https://github.com/EdenEast/nightfox.nvim
 
-local nightfox = require 'nightfox'
-
-nightfox.setup {
+require('nightfox').setup {
     options = {
-        transparent = true,
+        transparent = false,
         styles = {
-            comments = 'bold', -- Value is any valid attr-list value `:help attr-list`
+            comments = 'NONE', -- Value is any valid attr-list value `:help attr-list`
             conditionals = 'bold',
             constants = 'bold',
             functions = 'bold',
             keywords = 'bold',
             numbers = 'bold',
             operators = 'NONE',
-            strings = 'NONE',
-            types = 'NONE',
+            strings = 'bold',
+            types = 'bold',
             variables = 'NONE',
         },
         modules = {

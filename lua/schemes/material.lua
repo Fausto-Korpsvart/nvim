@@ -1,8 +1,6 @@
 -- https://github.com/marko-cerovac/material.nvim
 
-local material = require 'material'
-
-material.setup {
+require('material').setup {
     styles = {
         comments = { italic = true },
         strings = { bold = true },
@@ -13,7 +11,6 @@ material.setup {
         types = {},
     },
     plugins = {
-        'dashboard',
         'gitsigns',
         'hop',
         'indent-blankline',
@@ -28,4 +25,3 @@ material.setup {
 }
 
 vim.g.material_style = 'deep ocean' -- deep ocean|palenight
--- vim.cmd 'colorscheme material'

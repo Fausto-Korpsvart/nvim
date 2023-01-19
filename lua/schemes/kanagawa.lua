@@ -1,8 +1,6 @@
 -- https://github.com/rebelot/kanagawa.nvim
 
-local kanagawa = require 'kanagawa'
-
-kanagawa.setup {
+require('kanagawa').setup {
     undercurl = false,
 }
 

@@ -3,10 +3,7 @@ return {
         'sindrets/diffview.nvim',
         event = 'BufRead',
         config = function()
-            local diffview = require 'diffview'
-            local callback = require('diffview.config').diffview_callback
-
-            diffview.setup {
+            require('diffview').setup {
                 enhanced_diff_hl = true,
                 use_icons = true,
                 icons = {
@@ -26,12 +23,12 @@ return {
                 key_bindings = {
                     disable_defaults = false,
                     file_panel = {
-                        ['l'] = callback 'select_entry',
-                        ['R'] = callback 'refresh_files',
-                        ['L'] = callback 'open_commit_log',
+                        ['l'] = require('diffview.config').diffview_callback 'select_entry',
+                        ['R'] = require('diffview.config').diffview_callback 'refresh_files',
+                        ['L'] = require('diffview.config').diffview_callback 'open_commit_log',
                     },
                     file_history_panel = {
-                        ['l'] = callback 'select_entry',
+                        ['l'] = require('diffview.config').diffview_callback 'select_entry',
                     },
                 },
             }
@@ -51,9 +48,7 @@ return {
         'TimUntersberger/neogit',
         event = 'BufRead',
         config = function()
-            local neogit = require 'neogit'
-
-            neogit.setup {
+            require('neogit').setup {
                 disable_commit_confirmation = true,
                 signs = {
                     section = { '▸', '▾' },
@@ -65,12 +60,12 @@ return {
                 },
                 sections = {
                     untracked = { folded = false },
-                    unstaged  = { folded = false },
-                    staged    = { folded = false },
-                    stashes   = { folded = false },
-                    unpulled  = { folded = false },
-                    unmerged  = { folded = false },
-                    recent    = { folded = false },
+                    unstaged = { folded = false },
+                    staged = { folded = false },
+                    stashes = { folded = false },
+                    unpulled = { folded = false },
+                    unmerged = { folded = false },
+                    recent = { folded = false },
                 },
             }
         end,
@@ -79,16 +74,14 @@ return {
         'lewis6991/gitsigns.nvim',
         event = 'BufRead',
         config = function()
-            local gitsigns = require 'gitsigns'
-
-            gitsigns.setup {
+            require('gitsigns').setup {
                 signs = {
-                    add          = { text = '▏' },
-                    change       = { text = '▏' },
-                    delete       = { text = '▏' },
-                    topdelete    = { text = '▏' },
+                    add = { text = '▏' },
+                    change = { text = '▏' },
+                    delete = { text = '▏' },
+                    topdelete = { text = '▏' },
                     changedelete = { text = '▏' },
-                    untracked    = { text = '▏' },
+                    untracked = { text = '▏' },
                 },
                 signcolumn = true,
                 numhl = true,

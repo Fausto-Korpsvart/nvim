@@ -298,14 +298,7 @@ return {
         'mrjones2014/legendary.nvim',
         event = 'BufRead',
         config = function()
-            -- https://github.com/mrjones2014/legendary.nvim
-
-            local legendary_ok, legendary = pcall(require, 'legendary')
-            if not legendary_ok then
-                return
-            end
-
-            legendary.setup {
+            require('legendary').setup {
                 include_builtin = false,
                 include_legendary_cmds = false,
                 select_prompt = 'keymaps | Commands',
@@ -800,8 +793,6 @@ return {
         'nvim-lualine/lualine.nvim',
         event = 'BufRead',
         config = function()
-            local lualine = require 'lualine'
-
             local hide_in_width = function()
                 return vim.fn.winwidth(0) > 80
             end
@@ -1025,7 +1016,7 @@ return {
                 padding = { left = 0, right = 0 },
             } -- ]]]>
 
-            lualine.setup {
+            require('lualine').setup {
                 options = {
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
@@ -1080,9 +1071,7 @@ return {
             end,
         },
         config = function()
-            local neotree = require 'neo-tree'
-
-            neotree.setup {
+            require('neo-tree').setup {
                 close_if_last_window = true,
                 popup_border_style = 'rounded',
                 default_component_configs = {
@@ -1193,9 +1182,7 @@ return {
         'folke/noice.nvim',
         event = 'VimEnter',
         config = function()
-            local noice = require 'noice'
-
-            noice.setup {
+            require('noice').setup {
                 cmdline = {
                     view = 'cmdline',
                     format = {
@@ -1252,26 +1239,23 @@ return {
         module = true,
         cmd = 'Telescope',
         config = function()
-            local telescope = require 'telescope'
-            local actions = require 'telescope.actions'
-
-            telescope.setup {
+            require('telescope').setup {
                 defaults = {
                     prompt_prefix = '    ',
                     selection_caret = '⯈ ',
                     path_display = { 'absolute' }, -- hidden, tail, absolute, smart, shorten, truncate
                     mappings = {
                         n = {
-                            ['q'] = actions.close,
-                            ['l'] = actions.select_default,
-                            ['s'] = actions.select_horizontal,
-                            ['v'] = actions.select_vertical,
+                            ['q'] = require('telescope.actions').close,
+                            ['l'] = require('telescope.actions').select_default,
+                            ['s'] = require('telescope.actions').select_horizontal,
+                            ['v'] = require('telescope.actions').select_vertical,
 
-                            ['j'] = actions.move_selection_next,
-                            ['k'] = actions.move_selection_previous,
-                            ['H'] = actions.move_to_top,
-                            ['M'] = actions.move_to_middle,
-                            ['L'] = actions.move_to_bottom,
+                            ['j'] = require('telescope.actions').move_selection_next,
+                            ['k'] = require('telescope.actions').move_selection_previous,
+                            ['H'] = require('telescope.actions').move_to_top,
+                            ['M'] = require('telescope.actions').move_to_middle,
+                            ['L'] = require('telescope.actions').move_to_bottom,
                         },
                     },
                 },
@@ -1306,7 +1290,7 @@ return {
                     },
                 },
             }
-            telescope.load_extension 'noice'
+            require('telescope').load_extension 'noice'
         end,
     }, -- ]]]>
     { -- Todo Comments<[[[
@@ -1338,9 +1322,7 @@ return {
         -- https://github.com/folke/trouble.nvim
         'folke/trouble.nvim',
         config = function()
-            local trouble = require 'trouble'
-
-            trouble.setup {
+            require('trouble').setup {
                 width = 35,
                 height = 10,
                 mode = 'workspace_diagnostics', -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"

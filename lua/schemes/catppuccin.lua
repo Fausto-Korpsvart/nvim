@@ -1,8 +1,6 @@
 -- https://github.com/catppuccin/nvim
 
-local catppuccin = require 'catppuccin'
-
-catppuccin.setup {
+require('catppuccin').setup {
     styles = {
         booleans = { 'bold' },
         comments = { 'bold' },

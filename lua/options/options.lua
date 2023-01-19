@@ -74,7 +74,7 @@ opt.wildmode = 'full'
 opt.wildoptions = 'pum,tagfile'
 opt.wrap = false
 opt.writebackup = false
-opt.path:append { '**' } -- Finding files - search down into sub-folders
+opt.path:append { '**' }
 opt.wildignore:append { '*/node_modules/*' }
 opt.dictionary:append '/usr/share/dict/linux.words'
 
@@ -98,7 +98,7 @@ opt.fillchars:append {
 }
 
 vim.g.loaded_perl_provider = 0
-vim.g.markdown_recommended_style = 0 -- Markdown Fix Indentation Settings
+vim.g.markdown_recommended_style = 0
 vim.scriptencoding = 'utf-8'
 vim.cmd 'filetype plugin on'
 vim.cmd 'filetype plugin indent on'
