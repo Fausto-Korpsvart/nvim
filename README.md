@@ -10,7 +10,7 @@
 
   > My simple configuration for the Neovim Code Editor.
 
-**Alpha**
+**ALPHA**
 ![Alpha](https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-01.png)
 
 <details>
