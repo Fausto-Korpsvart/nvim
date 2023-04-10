@@ -10,14 +10,12 @@ autocmd('BufEnter', {
     end,
 })
 
-vim.api.nvim_create_autocmd('BufReadPost', {
+autocmd('BufReadPost', {
     desc = 'Go To The Last Cursor Postion',
     group = general,
     callback = function()
-        local mark = vim.api.nvim_buf_get_mark(0, '"')
-        local lcount = vim.api.nvim_buf_line_count(0)
-        if mark[1] > 0 and mark[1] <= lcount then
-            pcall(vim.api.nvim_win_set_cursor, 0, mark)
+        if vim.fn.line '\'"' > 1 and vim.fn.line '\'"' <= vim.fn.line '$' then
+            vim.cmd 'normal! g`"'
         end
     end,
 })
@@ -42,19 +40,16 @@ autocmd('TextYankPost', {
     end,
 })
 
-vim.api.nvim_create_autocmd('FileType', {
+autocmd('FileType', {
     desc = 'Close Some Filetypes With <q>',
     group = general,
     pattern = {
         'qf',
         'help',
         'man',
-        'notify',
         'lspinfo',
-        'startuptime',
         'spectre_panel',
         'tsplayground',
-        'PlenaryTestPopup',
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
@@ -82,6 +77,7 @@ autocmd('FileType', {
 })
 
 augroup('setIndent', { clear = true })
+
 autocmd('Filetype', {
     desc = 'Set indentation To 2 Spaces In Some Filetypes',
     group = 'setIndent',
@@ -104,6 +100,7 @@ autocmd('FileType', {
 })
 
 augroup('setLineLenght', { clear = true })
+
 autocmd('Filetype', {
     desc = 'Disable line lenght marker',
     group = 'setLineLenght',
@@ -130,14 +127,14 @@ autocmd('VimResized', {
     end,
 })
 
-autocmd('TermOpen', {
-    desc = 'Start TermMode When TermBuf Open.',
-    group = general,
-    callback = function()
-        vim.opt_local.number = false
-        vim.opt_local.relativenumber = false
-    end,
-})
+-- autocmd('TermOpen', {
+--     desc = 'Start TermMode When TermBuf Open.',
+--     group = general,
+--     callback = function()
+--         vim.opt_local.number = false
+--         vim.opt_local.relativenumber = false
+--     end,
+-- })
 
 -- Plugins
 vim.cmd [[autocmd TermOpen term://* lua set_terminal_keymaps()]]
@@ -147,11 +144,17 @@ autocmd({ 'User' }, {
     group = general,
     pattern = { 'AlphaReady' },
     callback = function()
-        vim.cmd [[
-      set showtabline=0 | autocmd BufUnload <buffer> set showtabline=0
-      set laststatus=0 | autocmd BufUnload <buffer> set laststatus=2
-      set cmdheight=0 | autocmd BufUnload <buffer> set cmdheight=1
-    ]]
+        vim.opt.showtabline = 0
+        vim.opt.cmdheight = 0
+        vim.opt.laststatus = 0
+        autocmd('BufUnload', {
+            pattern = '<buffer>',
+            callback = function()
+                vim.opt.showtabline = 0
+                vim.opt.cmdheight = 0
+                vim.opt.laststatus = 2
+            end,
+        })
     end,
 })
 

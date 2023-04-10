@@ -3,17 +3,7 @@ return {
 
     'nvim-treesitter/nvim-treesitter',
     module = true,
-    event = 'BufRead',
-    cmd = {
-        'TSInstall',
-        'TSInstallInfo',
-        'TSUpdate',
-        'TSBufEnable',
-        'TSBufDisable',
-        'TSEnable',
-        'TSDisable',
-        'TSModuleInfo',
-    },
+    event = 'BufReadPost',
     dependencies = {
         'windwp/nvim-ts-autotag',
         'mrjones2014/nvim-ts-rainbow',
@@ -27,6 +17,7 @@ return {
             ensure_installed = {
                 'html',
                 'help',
+                'haskell',
                 'css',
                 'scss',
                 'javascript',
@@ -47,21 +38,11 @@ return {
             },
             sync_install = false,
             auto_install = true,
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = { 'markdown' },
-            },
-            indent = {
-                enable = true,
-            },
-            context_commentstring = {
-                enable = false,
-                enable_autocmd = false,
-            },
+            indent = { enable = true },
+            matchup = { enable = true },
+            highlight = { enable = true, additional_vim_regex_highlighting = { 'markdown' } },
+            context_commentstring = { enable = false, enable_autocmd = false },
             additional_vim_regex_highlighting = { 'markdown' },
-            matchup = {
-                enable = true,
-            },
             rainbow = {
                 enable = true,
                 extended_mode = true,
@@ -74,7 +55,6 @@ return {
                     '#1abc9c',
                     '#3e68d7',
                 },
-                disable = {},
             },
         }
     end,

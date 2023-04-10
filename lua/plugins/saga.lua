@@ -5,16 +5,38 @@ return {
         config = function()
             require('lspsaga').setup {
                 finder = {
-                    edit = { 'l' },
-                    vsplit = 'v',
-                    split = 's',
-                    tabe = 't',
+                    keys = {
+                        edit = { 'l' },
+                        vsplit = 'v',
+                        split = 's',
+                        tabe = 't',
+                    },
                 },
                 definition = {
                     edit = '<C-o>',
                     vsplit = '<C-v>',
                     split = '<C-s>',
                     tabe = '<C-t>',
+                },
+                diagnostic = {
+                    on_insert = true,
+                    on_insert_follow = false,
+                    insert_winblend = 0,
+                    show_virt_line = true,
+                    show_code_action = true,
+                    show_source = true,
+                    jump_num_shortcut = true,
+                    --1 is max
+                    max_width = 0.7,
+                    custom_fix = nil,
+                    custom_msg = nil,
+                    text_hl_follow = false,
+                    border_follow = true,
+                    keys = {
+                        exec_action = 'o',
+                        quit = 'q',
+                        go_action = 'g',
+                    },
                 },
                 rename = {
                     quit = 'q',
@@ -23,24 +45,35 @@ return {
                     whole_project = false,
                 },
                 outline = {
-                    win_width = 35,
+                    win_width = 40,
                     auto_preview = false,
                     auto_close = false,
+                    keys = {
+                        jump = 'l',
+                        expand_collapse = 'h',
+                        quit = 'q',
+                    },
                 },
                 callhierarchy = {
                     show_detail = true,
-                    keys = {
-                        vsplit = 'v',
-                        split = 's',
-                        jump = 'n',
-                    },
+                    keys = { vsplit = 'v', split = 's', jump = 'n' },
                 },
                 symbol_in_winbar = {
+                    enable = false,
                     separator = '  ',
+                    hide_keyword = true,
+                    show_file = true,
+                    folder_level = 2,
+                    respect_root = false,
                     color_mode = true,
+                },
+                beacon = {
+                    enable = true,
+                    frequency = 5,
                 },
                 ui = {
                     title = false,
+                    border = 'single',
                     expand = '▸',
                     collaspe = '▾',
                     code_action = '',
@@ -57,7 +90,7 @@ return {
                         blue = '#7ca1f2',
                         purple = '#fca7ea',
                         white = '#c8d3f5',
-                        black = '#191726', --1e2030
+                        black = '#191726',
                     },
                 },
             }

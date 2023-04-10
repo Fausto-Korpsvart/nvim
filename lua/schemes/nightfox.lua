@@ -3,18 +3,7 @@
 require('nightfox').setup {
     options = {
         transparent = false,
-        styles = {
-            comments = 'NONE', -- Value is any valid attr-list value `:help attr-list`
-            conditionals = 'bold',
-            constants = 'bold',
-            functions = 'bold',
-            keywords = 'bold',
-            numbers = 'bold',
-            operators = 'NONE',
-            strings = 'bold',
-            types = 'bold',
-            variables = 'NONE',
-        },
+        dim_inactive = true,
         modules = {
             cmp = true,
             dap_ui = true,
@@ -27,7 +16,6 @@ require('nightfox').setup {
             lsp_trouble = true,
             neogit = true,
             neotree = true,
-            notify = true,
             telescope = true,
             tsrainbow = true,
         },

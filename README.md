@@ -8,7 +8,7 @@
   	</p>
   </div>
 
-  > This is the simple configuration I use for my Neovim Code Editor, this is a configuration that will always be under development, as I am still learning the Lua language to improve it, I hope you like it.
+  > My simple configuration for the Neovim Code Editor.
 
 **Alpha Startup Editor**
 ![Alpha](https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-01.png)
@@ -27,38 +27,4 @@
 		<b>Telescope</b>
 		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-05.png' />
 	</p>
-</details>
-
-<details>
-	<summary>File structure tree</summary>
-		<pre>
-├── init.lua
-├── lazy-lock.json
-└── lua
-    ├── options
-    │   ├── autocmds.lua
-    │   ├── hilights.lua
-    │   ├── init.lua
-    │   ├── keymaps.lua
-    │   └── options.lua
-    ├── plugins
-    │   ├── basic.lua
-    │   ├── code.lua
-    │   ├── git.lua
-    │   ├── init.lua
-    │   ├── sitter.lua
-    │   ├── ui.lua
-    │   ├── wdev.lua
-    │   └── zero.lua
-    └── schemes
-        ├── catppuccin.lua
-        ├── everforest.lua
-        ├── gruvbox.lua
-        ├── init.lua
-        ├── kanagawa.lua
-        ├── material.lua
-        ├── nightfox.lua
-        ├── rosepine.lua
-        └── tokyonight.lua
-		</pre>
 </details>

@@ -8,9 +8,9 @@ opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 opt.backspace = 'start,eol,indent'
 opt.breakindent = true
 opt.clipboard = 'unnamedplus'
-opt.cmdheight = 1
+opt.cmdheight = 0
 opt.colorcolumn = '80'
-opt.completeopt = { 'menuone', 'noselect' }
+opt.completeopt = { 'menuone', 'noselect', 'preview' }
 opt.conceallevel = 0
 opt.confirm = true
 opt.cursorcolumn = false
@@ -39,8 +39,7 @@ opt.list = true
 opt.modifiable = true
 opt.mouse = 'n'
 opt.number = true
-opt.numberwidth = 1
-opt.pumheight = 15
+opt.pumheight = 20
 opt.relativenumber = true
 opt.scrolloff = 20
 opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize' }
@@ -77,7 +76,8 @@ opt.writebackup = false
 opt.path:append { '**' }
 opt.wildignore:append { '*/node_modules/*' }
 opt.dictionary:append '/usr/share/dict/linux.words'
-
+opt.numberwidth = 3
+opt.statuscolumn = '%=%{&nu?(&rnu && v:relnum?v:relnum:v:lnum):""}%=%s'
 opt.listchars:append {
     eol = '↴',
     tab = '⇥ ',
@@ -87,57 +87,16 @@ opt.listchars:append {
     extends = '→',
     precedes = '←',
 }
-
 opt.fillchars:append {
     eob = ' ',
     vert = '│',
     fold = ' ',
     foldsep = '',
-    foldopen = '⮮',
-    foldclose = '│',
+    foldopen = '▼',
+    foldclose = '▷',
 }
-
 vim.g.loaded_perl_provider = 0
 vim.g.markdown_recommended_style = 0
 vim.scriptencoding = 'utf-8'
-vim.cmd 'filetype plugin on'
-vim.cmd 'filetype plugin indent on'
 vim.cmd 'set wildchar=<C-k>'
 vim.cmd 'set guicursor=n-v-ve:block-blinkon200,i-c-ci-r:hor50-Cursor-blinkon10'
-
-local disabled_built_ins = {
-    'netrw',
-    'netrwPlugin',
-    'netrwSettings',
-    'netrwFileHandlers',
-    'gzip',
-    'zip',
-    'zipPlugin',
-    'tar',
-    'tarPlugin',
-    'getscript',
-    'getscriptPlugin',
-    'vimball',
-    'vimballPlugin',
-    'tohtml',
-    '2html_plugin',
-    'logipat',
-    'rrhelper',
-    'spellfile_plugin',
-    'matchit',
-    'matchparen',
-    'tutor',
-    'tutor_mode_plugin',
-    'logiPat',
-    'rrhelper',
-    'rplugin',
-    'shada_plugin',
-    'synmenu',
-    'optwin',
-    'compiler',
-    'bugreport',
-    'ftplugin',
-}
-for _, plugin in pairs(disabled_built_ins) do
-    vim.g['loaded_' .. plugin] = 1
-end

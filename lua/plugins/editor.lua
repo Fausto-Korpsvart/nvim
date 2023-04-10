@@ -1,7 +1,10 @@
 return {
     { -- https://github.com/famiu/bufdelete.nvim
         'famiu/bufdelete.nvim',
-        event = 'BufRead',
+        event = 'VeryLazy',
+        keys = {
+            vim.keymap.set('n', '<Leader>s', '<CMD>Bdelete<CR>'),
+        },
     },
     { -- https://github.com/chrisbra/changesplugin
         'chrisbra/changesplugin',
@@ -41,7 +44,7 @@ return {
     },
     { -- https://github.com/editorconfig/editorconfig-vim
         'editorconfig/editorconfig-vim',
-        event = 'BufRead',
+        event = 'VeryLazy',
         config = function()
             vim.g.EditorConfig_exec_path = '/usr/bin/editorconfig'
             vim.g.EditorConfig_core_mode = 'external_command'
@@ -51,21 +54,33 @@ return {
     },
     { -- https://github.com/phaazon/hop.nvim
         'phaazon/hop.nvim',
-        event = 'BufRead',
+        event = 'VeryLazy',
+        keys = {
+            vim.keymap.set('n', ';j', '<CMD>HopWord<CR>'),
+            vim.keymap.set('n', ';1', '<CMD>HopChar1<CR>'),
+            vim.keymap.set('n', ';2', '<CMD>HopChar2<CR>'),
+            vim.keymap.set('n', ';l', '<CMD>HopWordCurrentLine<CR>'),
+            vim.keymap.set('n', ';h', '<CMD>lua require"hop".hint_lines()<CR>'),
+            vim.keymap.set('v', ';l', '<CMD>HopWord<CR>'),
+            vim.keymap.set('v', ';1', '<CMD>HopChar1<CR>'),
+            vim.keymap.set('v', ';3', '<CMD>HopChar2<CR>'),
+            vim.keymap.set('v', ';j', '<CMD>HopWordCurrentLine<CR>'),
+            vim.keymap.set('v', ';h', '<CMD>lua require"hop".hint_lines()<CR>'),
+        },
         config = function()
             require('hop').setup()
         end,
     },
     { -- https://github.com/lukas-reineke/indent-blankline.nvim
         'lukas-reineke/indent-blankline.nvim',
-        event = 'BufRead',
+        event = 'BufEnter',
         dependencies = {
-            {
+            { -- https://github.com/echasnovski/mini.indentscope
                 'echasnovski/mini.indentscope',
                 config = function()
                     require('mini.indentscope').setup {
                         options = { try_as_border = true },
-                        symbol = '▏',
+                        symbol = '│',
                     }
                 end,
             },
@@ -106,14 +121,20 @@ return {
                     'quickfix',
                     'telescope',
                     'terminal',
+                    'markdown',
+                    'lazy',
                 },
                 filetype_exclude = {
                     'alpha',
                     'git',
                     'gitcommit',
                     'help',
+                    'lazy',
                     'log',
+                    'markdown',
+                    'neo-tree',
                     'neogitstatus',
+                    'nui',
                     'TelescopePrompt',
                     'Trouble',
                 },
@@ -122,47 +143,54 @@ return {
     },
     { -- https://github.com/andymass/vim-matchup
         'andymass/vim-matchup',
+        branch = 'master',
+        event = 'BufReadPost',
         config = function()
-            vim.g.matchup_matchparen_offscreen = { method = 'popup', fullwidth = 1 }
+            vim.g.matchup_enabled = 1
+            vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+            -- vim.g.matchup_matchparen_offscreen = { method = 'popup', position = 'cursor' }
+            -- vim.g.matchup_matchparen_deferred = 1
+            -- vim.g.matchup_matchparen_hi_surround_always = 1
+            vim.g.matchup_transmute_enabled = 1
+            vim.g.matchup_matchparen_timeout = 500
+            vim.g.matchup_matchparen_insert_timeout = 500
         end,
     },
     { -- https://github.com/MunifTanjim/prettier.nvim
-        -- https://prettier.io/docs/en/options.html
         'MunifTanjim/prettier.nvim',
-        event = 'BufRead',
+        event = 'VeryLazy',
         config = function()
             require('prettier').setup {
-                bin = 'prettierd', -- or prettierd -> https://github.com/fsouza/prettierd | npm install -g @fsouza/prettierd
+                bin = 'prettier',
                 filetypes = {
                     'css',
                     'html',
-                    'javascript',
-                    'javascriptreact',
-                    'typescript',
-                    'typescriptreact',
                     'json',
-                    'less',
                     'markdown',
+                    'sass',
                     'scss',
                     'yaml',
                 },
                 cli_options = {
-                    arrow_parens = 'avoid',
-                    single_quote = true,
-                    bracketSameLine = true,
-                    html_whitespace_sensitivty = 'strict',
+                    arrowParens = 'avoid',
+                    singleQuote = true,
+                    bracketSameLine = false,
+                    htmlWhitespaceSensitivity = 'css',
                     singleAttributePerLine = true,
-                    trailing_comma = 'none',
+                    trailingComma = 'none',
+                    tabWidth = 4,
+                    endOfLine = 'lf',
                     semi = false,
+                    printWidth = 80,
                     proseWrap = 'always',
                 },
                 ['null-ls'] = {
                     condition = function()
-                        return prettier.config_exists {
+                        return require('prettier').config_exists {
                             check_package_json = true,
                         }
                     end,
-                    runtime_condition = function(params)
+                    runtime_condition = function()
                         return true
                     end,
                     timeout = 5000,

@@ -3,38 +3,19 @@ return {
         'nvim-lua/plenary.nvim',
         module = true,
     },
-    -- LSP Utils
-    { -- https://github.com/RRethy/vim-illuminate
-        'RRethy/vim-illuminate',
-        event = 'BufReadPost',
-        opts = { delay = 200 },
-        config = function()
-            require('illuminate').configure {
-                filetypes_denylist = {
-                    'alpha',
-                    'packer',
-                    'neo-tree',
-                    'Trouble',
-                    'dirvish',
-                    'toggleterm',
-                    'neogitstatus',
-                    'DressingSelect',
-                    'TelescopePrompt',
-                },
-            }
-        end,
-    },
     { -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
         'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
         event = 'BufReadPost',
+        keys = {
+            vim.keymap.set('n', 'vd', '<Plug>(toggle-lsp-diag)'),
+        },
         config = function()
-            require('toggle_lsp_diagnostics').init {}
+            require('toggle_lsp_diagnostics').init(vim.diagnostic.config())
         end,
     },
-    -- Standar Utils
     { -- https://github.com/haringsrob/nvim_context_vt
         'haringsrob/nvim_context_vt',
-        event = 'BufRead',
+        event = 'VeryLazy',
         config = function()
             require('nvim_context_vt').setup {
                 prefix = '',
@@ -44,69 +25,107 @@ return {
             }
         end,
     },
-    { -- https://github.com/j-hui/fidget.nvim
-        'j-hui/fidget.nvim',
-        event = 'BufRead',
+    -- { -- https://github.com/j-hui/fidget.nvim
+    --     'j-hui/fidget.nvim',
+    --     event = 'VeryLazy',
+    --     config = function()
+    --         require('fidget').setup {
+    --             text = { spinner = 'dots_snake', done = '' },
+    --             align = { bottom = false },
+    --             window = { blend = 0 },
+    --         }
+    --     end,
+    -- },
+    { -- https://github.com/ellisonleao/glow.nvim
+        'ellisonleao/glow.nvim',
+        event = 'VeryLazy',
+        keys = {
+            vim.keymap.set('n', 'gl', '<CMD>Glow<CR>'),
+            vim.keymap.set('n', 'cg', '<CMD>Glow!<CR>'),
+        },
         config = function()
-            require('fidget').setup {
-                text = {
-                    spinner = 'dots_snake',
-                    done = '',
-                },
-                align = {
-                    bottom = false,
-                },
-                window = {
-                    blend = 0,
+            require('glow').setup { border = 'none', style = 'dark', width = 150, height = 150 }
+        end,
+    },
+    {
+        'Pocco81/HighStr.nvim',
+        event = 'VeryLazy',
+        keys = {
+            vim.keymap.set('v', '<Leader>h', ':<c-u>HSHighlight 1<CR>'),
+            vim.keymap.set('v', '<Leader>y', ':<c-u>HSRmHighlight<CR>'),
+        },
+        config = function()
+            require('high-str').setup {
+                verbosity = 0,
+                saving_path = '/tmp/highstr/',
+                highlight_colors = {
+                    color_0 = { '#0c0d0e', 'smart' }, -- Cosmic charcoal
+                    color_1 = { '#e5c07b', 'smart' }, -- Pastel yellow
+                    color_2 = { '#7FFFD4', 'smart' }, -- Aqua menthe
+                    color_3 = { '#8A2BE2', 'smart' }, -- Proton purple
+                    color_4 = { '#FF4500', 'smart' }, -- Orange red
+                    color_5 = { '#008000', 'smart' }, -- Office green
+                    color_6 = { '#0000FF', 'smart' }, -- Just blue
+                    color_7 = { '#FFC0CB', 'smart' }, -- Blush pink
+                    color_8 = { '#FFF9E3', 'smart' }, -- Cosmic latte
+                    color_9 = { '#7d5c34', 'smart' }, -- Fallow brown
                 },
             }
         end,
     },
-    { -- https://github.com/phaazon/mind.nvim/
-        'phaazon/mind.nvim',
-        branch = 'v2.2',
-        event = 'BufRead',
-        config = function()
-            require('mind').setup {
-                persistence = {
-                    state_path = '~/.local/share/mind.nvim/mind.json',
-                    data_dir = '~/.local/share/mind.nvim/data',
-                },
-            }
-        end,
+    { -- https://github.com/onsails/lspkind.nvim
+        'onsails/lspkind.nvim',
+        event = 'VeryLazy',
     },
     { -- https://github.com/vigoux/notifier.nvim
         'vigoux/notifier.nvim',
+        event = 'VeryLazy',
         config = function()
             require('notifier').setup {
-                components = {
-                    'nvim',
-                    'lsp',
-                },
-                notify = {
-                    clear_time = 9999,
-                    min_level = vim.log.levels.INFO,
-                },
+                components = { 'nvim', 'lsp' },
+                notify = { clear_time = 9999, min_level = vim.log.levels.INFO },
                 component_name_recall = false,
                 zindex = 50,
             }
         end,
     },
+    {
+        'rcarriga/nvim-notify',
+        event = 'VeryLazy',
+        config = function()
+            require('notify').setup {
+                minimum_width = 20,
+                render = 'compact',
+                stages = 'static',
+                top_down = true,
+                on_open = function(win)
+                    -- vim.api.nvim_win_set_option(win, 'winblend', 50)
+                    vim.api.nvim_win_set_config(win, { zindex = 200 })
+                end,
+            }
+        end,
+    },
     { -- https://github.com/epwalsh/obsidian.nvim
         'epwalsh/obsidian.nvim',
-        event = 'BufRead',
+        -- event = 'VeryLazy',
+        keys = {
+            vim.keymap.set('n', 'vs', '<CMD>ObsidianSearch<CR>'),
+        },
         config = function()
             require('obsidian').setup {
                 dir = '~/@fausto/dev/Obsidian-Vault',
-                completion = {
-                    nvim_cmp = true,
-                },
+                completion = { nvim_cmp = true },
             }
         end,
     },
     { -- https://github.com/tyru/open-browser.vim
         'tyru/open-browser.vim',
-        event = 'BufRead',
+        event = 'VeryLazy',
+        keys = {
+            vim.keymap.set('n', 'ob', '<Plug>(openbrowser-open)<CR>'),
+            vim.keymap.set('n', 'sw', '<Plug>(openbrowser-search) <cword><CR>'),
+            vim.keymap.set('n', 'sb', '<Plug>(openbrowser-smart-search)<CR>'),
+        },
         config = function()
             vim.cmd [[
                 let g:openbrowser_fix_hosts = {"google.com": "search.brave.com"}
@@ -128,67 +147,13 @@ return {
     },
     { -- https://github.com/folke/zen-mode.nvim
         'folke/zen-mode.nvim',
+        event = 'VeryLazy',
         config = function()
             require('zen-mode').setup {}
         end,
     },
-    { -- https://github.com/mg979/vim-visual-multi
-        'mg979/vim-visual-multi',
-        branch = 'master',
-        event = 'BufRead',
-        config = function()
-            vim.cmd [[
-                let g:VM_maps                         = {}
-                let g:VM_leader                       = ','
-                let g:VM_maps['Motion']               = ',,'
-                let g:VM_default_mappings             = 0
-                let g:VM_mouse_mappings               = 1
-                let g:VM_maps['Exit']                 = 'q'
-                let g:VM_maps['Find Under']           = '<C-n>'
-                let g:VM_maps['Find Subword Under']   = '<C-N>'
-                let g:VM_maps['Add Cursor Down']      = '<C-Down>'
-                let g:VM_maps['Add Cursor Up']        = '<C-Up>'
-                let g:VM_maps['Switch Mode']          = '<Tab>'
-                let g:VM_maps['Undo']                 = '<C-u>'
-                let g:VM_maps['Redo']                 = '<C-r>'
-                let g:VM_maps['Find Next']            = 'n'
-                let g:VM_maps['Find Prev']            = 'p'
-                let g:VM_maps['Goto Next']            = ']'
-                let g:VM_maps['Goto Prev']            = '['
-                let g:VM_maps['Seek Next']            = '<C-f>'
-                let g:VM_maps['Seek Prev']            = '<C-b>'
-                let g:VM_maps["Align"]                = 'A'
-                let g:VM_maps["Numbers"]              = 'nu'
-                let g:VM_maps["Numbers Append"]       = 'NU'
-                let g:VM_maps['Skip Region']          = 'sr'
-                let g:VM_maps['Remove Region']        = 'rr'
-                let g:VM_maps['Invert Direction']     = 'o'
-                let g:VM_maps["Case Setting"]         = 'cs'
-                let g:VM_maps['Find Operator']        = 'm'
-                let g:VM_maps['Surround']             = 'S'
-                let g:VM_maps['Replace Pattern']      = 'R'
-                let g:VM_maps["Duplicate"]            = 'D'
-                let g:VM_maps["Merge Regions"]        = 'mr'
-                let g:VM_maps["Split Regions"]        = 'sr'
-                let g:VM_maps["Remove Last Region"]   = 'qr'
-                let g:VM_maps["Visual Subtract"]      = 'vs'
-                let g:VM_maps["Case Conversion Menu"] = 'CC'
-                let g:VM_maps["Search Menu"]          = 'SM'
-                let g:VM_maps["Zero Numbers"]         = '0n'
-                let g:VM_maps["Zero Numbers Append"]  = '0N'
-                let g:VM_maps["Shrink"]               = "_"
-                let g:VM_maps["Enlarge"]              = "+"
-                let g:VM_maps["Toggle Block"]         = 'tb'
-                let g:VM_maps["Toggle Single Region"] = '<CR>'
-                let g:VM_maps["Toggle Multiline"]     = 'ML'
-                " Highlights
-                let g:VM_Mono_hl   = 'DiffText'
-                let g:VM_Extend_hl = 'DiffAdd'
-                let g:VM_Cursor_hl = 'Visual'
-                let g:VM_Insert_hl = 'DiffChange'
-                let g:VM_highlight_matches = 'hi! Search ctermfg=228 cterm=underline'
-                let g:VM_highlight_matches = 'hi! link Search PmenuSel'
-            ]]
-        end,
+    { -- https://github.com/nvim-tree/nvim-web-devicons
+        'kyazdani42/nvim-web-devicons',
+        event = 'VeryLazy',
     },
 }

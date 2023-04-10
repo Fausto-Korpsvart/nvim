@@ -1,28 +1,25 @@
 -- https://github.com/catppuccin/nvim
 
 require('catppuccin').setup {
-    styles = {
-        booleans = { 'bold' },
-        comments = { 'bold' },
-        conditionals = { 'bold' },
-        functions = { 'bold' },
-        keywords = { 'bold' },
-        loops = {},
-        number = { 'bold' },
-        operators = {},
-        properties = { 'bold' },
-        strings = {},
-        types = { 'bold' },
-        variables = {},
+    dim_inactive = {
+        enabled = false,
+        shade = 'dark',
+        percentage = 0.10,
     },
     integrations = {
         cmp = true,
+        fidget = true,
         gitsigns = true,
         hop = true,
+        illuminate = true,
+        lsp_saga = true,
         markdown = true,
+        mason = true,
+        mini = true,
         neogit = true,
         neotree = true,
         notify = true,
+        noice = true,
         telescope = true,
         treesitter = true,
         lsp_trouble = true,
@@ -30,5 +27,6 @@ require('catppuccin').setup {
     },
 }
 
-vim.g.catppuccin_flavour = 'mocha' -- mocha|macchiato|frappe|latte
+vim.g.catppuccin_flavour = 'macchiato' -- mocha|macchiato|frappe|latte
 vim.cmd 'colorscheme catppuccin'
+
