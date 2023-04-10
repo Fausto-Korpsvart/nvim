@@ -10,21 +10,21 @@
 
   > My simple configuration for the Neovim Code Editor.
 
-**Alpha Startup Editor**
+**Alpha**
 ![Alpha](https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-01.png)
 
 <details>
 <summary>More Screenshots</summary>
 	<p>
-		<b>LSP CMP</b>
+		<b>NOICE + CMP</b>
 		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-03.png' />
-		<b>Noice</b>
+		<b>TELESCOPE</b>
 		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-06.png' />
-		<b>NeoTree</b>
+		<b>CMP</b>
 		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-02.png' />
-		<b>LSP Saga</b>
+		<b>LSP SAGA</b>
 		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-04.png' />
-		<b>Telescope</b>
+		<b>DIAGNOSTICS</b>
 		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-05.png' />
 	</p>
 </details>
