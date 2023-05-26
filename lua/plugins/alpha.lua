@@ -1,264 +1,269 @@
 return {
-    { -- https://github.com/goolord/alpha-nvim
-        'goolord/alpha-nvim',
-        config = function()
-            -- Variables
-            local alpha = require 'alpha'
-            local plenary_path = require 'plenary.path'
-            local dashboard = require 'alpha.themes.dashboard'
-            local cdir = vim.fn.getcwd()
-            local if_nil = vim.F.if_nil
+	-- https://github.com/goolord/alpha-nvim
+	'goolord/alpha-nvim',
+	dependencies = {
+		{
+			-- https://github.com/nvim-tree/nvim-web-devicons
+			'kyazdani42/nvim-web-devicons',
+			event = 'VeryLazy',
+		},
+	},
+	config = function()
 
-            local nvim_web_devicons = {
-                enabled = true,
-                highlight = true,
-            }
+		-- Variables<[[[
+		local alpha = require 'alpha'
+		local plenary_path = require 'plenary.path'
+		local dashboard = require 'alpha.themes.dashboard'
+		local cdir = vim.fn.getcwd()
+		local if_nil = vim.F.if_nil
 
-            -- Header
-            local function pick_color()
+		local nvim_web_devicons = {
+			enabled = true,
+			highlight = true,
+		}-- ]]]>
 
-                local colors = { 'String', 'Identifier', 'Keyword', 'Number' }
-                return colors[math.random(#colors)]
+		-- Header<[[[
+		local function pick_color()
+			local colors = { 'String', 'Identifier', 'Keyword', 'Number' }
+			return colors[math.random(#colors)]
+		end
 
-            end
+		local header = {
+			type = 'text',
+			val = {
+				[[ ▐ ▄ ▄▄▄ .       ▌ ▐·▪  • ▌ ▄ ·. ]],
+				[[•█▌▐█▀▄.▀·▪     ▪█·█▌██ ·██ ▐███▪]],
+				[[▐█▐▐▌▐▀▀▪▄ ▄█▀▄ ▐█▐█•▐█·▐█ ▌▐▌▐█·]],
+				[[██▐█▌▐█▄▄▌▐█▌.▐▌ ███ ▐█▌██ ██▌▐█▌]],
+				[[▀▀ █▪ ▀▀▀  ▀█▄▀▪. ▀  ▀▀▀▀▀  █▪▀▀▀]],
+			},
+			opts = {
+				hl = pick_color(),
+				position = 'center',
+			},
+		}-- ]]]>
 
-            local header = {
+		-- More Recent Used<[[[
+		local function get_extension(fn)
+			local match = fn:match '^.+(%..+)$'
+			local ext = ''
 
-                type = 'text',
-                val = {
-                    [[                                 ]],
-                    [[                                 ]],
-                    [[                                 ]],
-                    [[ ▐ ▄ ▄▄▄ .       ▌ ▐·▪  • ▌ ▄ ·. ]],
-                    [[•█▌▐█▀▄.▀·▪     ▪█·█▌██ ·██ ▐███▪]],
-                    [[▐█▐▐▌▐▀▀▪▄ ▄█▀▄ ▐█▐█•▐█·▐█ ▌▐▌▐█·]],
-                    [[██▐█▌▐█▄▄▌▐█▌.▐▌ ███ ▐█▌██ ██▌▐█▌]],
-                    [[▀▀ █▪ ▀▀▀  ▀█▄▀▪. ▀  ▀▀▀▀▀  █▪▀▀▀]],
-                },
-                opts = {
-                    position = 'center',
-                    hl = pick_color(),
-                },
-            }
+			if match ~= nil then
+				ext = match:sub(2)
+			end
+			return ext
+		end
 
-            -- More Recent Used
-            local function get_extension(fn)
-                local match = fn:match '^.+(%..+)$'
-                local ext = ''
+		local function icon(fn)
+			local nwd = require 'nvim-web-devicons'
+			local ext = get_extension(fn)
+			return nwd.get_icon(fn, ext, { default = true })
+		end
 
-                if match ~= nil then
-                    ext = match:sub(2)
-                end
-                return ext
-            end
+		local function file_button(fn, sc, short_fn, autocd)
+			short_fn = short_fn or fn
 
-            local function icon(fn)
-                local nwd = require 'nvim-web-devicons'
-                local ext = get_extension(fn)
-                return nwd.get_icon(fn, ext, { default = true })
-            end
+			local ico_txt
+			local fb_hl = {}
 
-            local function file_button(fn, sc, short_fn, autocd)
-                short_fn = short_fn or fn
+			if nvim_web_devicons.enabled then
+				local ico, hl = icon(fn)
 
-                local ico_txt
-                local fb_hl = {}
+				local hl_option_type = type(nvim_web_devicons.highlight)
 
-                if nvim_web_devicons.enabled then
+				if hl_option_type == 'boolean' then
+					if hl and nvim_web_devicons.highlight then
+						table.insert(fb_hl, { hl, 0, 3 })
+					end
+				end
+				if hl_option_type == 'String' then
+					table.insert(fb_hl, { nvim_web_devicons.highlight, 0, 3 })
+				end
+				ico_txt = ico .. '  '
+			else
+				ico_txt = ''
+			end
 
-                    local ico, hl = icon(fn)
+			local cd_cmd = (autocd and ' | cd %:h:t' or '')
 
-                    local hl_option_type = type(nvim_web_devicons.highlight)
+			local file_button_el =
 
-                    if hl_option_type == 'boolean' then
-                        if hl and nvim_web_devicons.highlight then
-                            table.insert(fb_hl, { hl, 0, 3 })
-                        end
-                    end
-                    if hl_option_type == 'String' then
-                        table.insert(fb_hl, { nvim_web_devicons.highlight, 0, 3 })
-                    end
-                    ico_txt = ico .. '  '
-                else
-                    ico_txt = ''
-                end
+				dashboard.button(sc, ico_txt .. short_fn, '<cmd>e ' .. fn .. cd_cmd .. ' <CR>')
 
-                local cd_cmd = (autocd and ' | cd %:h:t' or '')
+			local fn_start = short_fn:match '.*[/\\]'
 
-                local file_button_el =
+			if fn_start ~= nil then
+				table.insert(fb_hl, { 'Type', #ico_txt - 2, #fn_start + #ico_txt })
+			end
+			file_button_el.opts.hl = fb_hl
+			return file_button_el
+		end
 
-                dashboard.button(sc, ico_txt .. short_fn, '<cmd>e ' .. fn .. cd_cmd .. ' <CR>')
+		local default_mru_ignore = { 'gitcommit' }
 
-                local fn_start = short_fn:match '.*[/\\]'
+		local mru_opts = {
+			ignore = function(path, ext)
+				return (string.find(path, 'COMMIT_EDITMSG'))
+					or (vim.tbl_contains(default_mru_ignore, ext))
+			end,
+			autocd = false,
+		}
 
-                if fn_start ~= nil then
-                    table.insert(fb_hl, { 'Type', #ico_txt - 2, #fn_start + #ico_txt })
-                end
-                file_button_el.opts.hl = fb_hl
-                return file_button_el
+		local function mru(start, cwd, items_number, opts)
+			opts = opts or mru_opts
+			items_number = if_nil(items_number, 10)
 
-            end
+			local oldfiles = {}
 
-            local default_mru_ignore = { 'gitcommit' }
+			for _, v in pairs(vim.v.oldfiles) do
+				if #oldfiles == items_number then
+					break
+				end
 
-            local mru_opts = {
-                ignore = function(path, ext)
-                    return (string.find(path, 'COMMIT_EDITMSG'))
-                        or (vim.tbl_contains(default_mru_ignore, ext))
-                end,
-                autocd = false,
-            }
+				local cwd_cond
 
-            local function mru(start, cwd, items_number, opts)
-                opts = opts or mru_opts
-                items_number = if_nil(items_number, 10)
+				if not cwd then
+					cwd_cond = true
+				else
+					cwd_cond = vim.startswith(v, cwd)
+				end
 
-                local oldfiles = {}
+				local ignore = (opts.ignore and opts.ignore(v, get_extension(v))) or false
+				if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then
+					oldfiles[#oldfiles + 1] = v
+				end
+			end
 
-                for _, v in pairs(vim.v.oldfiles) do
-                    if #oldfiles == items_number then
-                        break
-                    end
+			local target_width = 40
 
-                    local cwd_cond
+			local tbl = {}
 
-                    if not cwd then
-                        cwd_cond = true
-                    else
-                        cwd_cond = vim.startswith(v, cwd)
-                    end
+			for i, fn in ipairs(oldfiles) do
+				local short_fn
 
-                    local ignore = (opts.ignore and opts.ignore(v, get_extension(v))) or false
-                    if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then
-                        oldfiles[#oldfiles + 1] = v
-                    end
-                end
+				if cwd then
+					short_fn = vim.fn.fnamemodify(fn, ':p:.')
+				else
+					short_fn = vim.fn.fnamemodify(fn, ':~')
+				end
 
-                local target_width = 40
+				if #short_fn > target_width then
+					short_fn = plenary_path.new(short_fn):shorten(1, { -2, -1 })
+					if #short_fn > target_width then
+						short_fn = plenary_path.new(short_fn):shorten(1, { -1 })
+					end
+				end
 
-                local tbl = {}
+				local shortcut = tostring(i + start - 2)
+				local file_button_el = file_button(fn, shortcut, short_fn, opts.autocd)
+				tbl[i] = file_button_el
+			end
+			return {
+				type = 'group',
+				val = tbl,
+				opts = { hl = pick_color() },
+			}
+		end
 
-                for i, fn in ipairs(oldfiles) do
+		local recent = {
+			type = 'group',
+			val = {
+				{
+					type = 'text',
+					val = 'Recent Files',
+					opts = {
+						hl = pick_color(),
+						shrink_margin = false,
+						position = 'center',
+					},
+				},
+				{ type = 'padding', val = 1 },
+				{
+					type = 'group',
+					val = function()
+						return { mru(1, cdir, 10) }
+					end,
+					opts = {
+						hl = pick_color(),
+						shrink_margin = false,
+					},
+				},
+			},
+		}-- ]]]>
 
-                    local short_fn
+		-- Buttons<[[[
+		local button = {
+			type = 'group',
+			val = {
+				{
+					type = 'text',
+					val = 'Quick Links',
+					opts = { hl = pick_color(), position = 'center' },
+				},
+				{ type = 'padding', val = 1 },
+				dashboard.button('R', '󰱼  Recent Files', ':Telescope oldfiles<CR>'),
+				dashboard.button('F', '󰱼  Find Files', ':Telescope find_files<CR>'),
+				dashboard.button('S', '󰊢  Git Status', ':Telescope git_status<CR>'),
+				dashboard.button('C', '  Git Commit', ':Telescope git_commits<CR>'),
+				dashboard.button('G', '󰈮  Grep Code', ':Telescope live_grep<CR>'),
+				dashboard.button('N', '  New File', ':ene <BAR> startinsert<CR>'),
+				dashboard.button('T', '  Terminal', ':ToggleTerm<CR>'),
+				dashboard.button(
+					'I',
+					'󰔎  Colorschemes',
+					':e ~/.config/nvim/lua/schemes/init.lua<CR>'
+				),
+				dashboard.button('U', '󰂠  Lazy Manager', ':Lazy check<CR>'),
+				dashboard.button('L', '  Neovim Init', ':e ~/.config/nvim/init.lua<CR>'),
+				dashboard.button('H', '󱙣  Neovim Health', ':checkhealth<CR>'),
+				dashboard.button('Q', '󰩈  Exit Neovim', ':qa<CR>'),
+			},
+			position = 'center',
+		}-- ]]]>
 
-                    if cwd then
-                        short_fn = vim.fn.fnamemodify(fn, ':p:.')
-                    else
-                        short_fn = vim.fn.fnamemodify(fn, ':~')
-                    end
+		-- Footer<[[[
+		local def_footer = function()
+			local datetime = os.date '  󰸗 %a.%d.%b.%Y '
+			local version = ' nvim '
+				.. vim.version().major
+				.. '.'
+				.. vim.version().minor
+				.. '.'
+				.. vim.version().patch
+			local lazy_ok, lazy = pcall(require, 'lazy')
+			if lazy_ok then
+				local total_plugins = '   ' .. lazy.stats().count .. ' Plugins'
+				return version .. total_plugins .. datetime
+			else
+				return version
+			end
+		end
 
-                    if #short_fn > target_width then
-                        short_fn = plenary_path.new(short_fn):shorten(1, { -2, -1 })
-                        if #short_fn > target_width then
-                            short_fn = plenary_path.new(short_fn):shorten(1, { -1 })
-                        end
-                    end
+		local footer = {
+			type = 'group',
+			val = {
+				{
+					type = 'text',
+					val = def_footer(),
+					opts = { hl = pick_color(), position = 'center' },
+				},
+			},
+		}-- ]]]>
 
-                    local shortcut = tostring(i + start - 1)
-                    local file_button_el = file_button(fn, shortcut, short_fn, opts.autocd)
-                    tbl[i] = file_button_el
+		local opts = {
+			layout = {
+				{ type = 'padding', val = 2 },
+				header,
+				{ type = 'padding', val = 2 },
+				recent,
+				{ type = 'padding', val = 2 },
+				button,
+				{ type = 'padding', val = 2 },
+				footer,
+			},
+			opts = { margin = 5 },
+		}
 
-                end
-                return {
-                    type = 'group',
-                    val = tbl,
-                    opts = { hl = pick_color() },
-                }
-            end
-
-            local recent = {
-                type = 'group',
-                val = {
-                    {
-                        type = 'text',
-                        val = 'Recent files',
-                        opts = {
-                            hl = pick_color(),
-                            shrink_margin = false,
-                            position = 'center',
-                        },
-                    },
-                    { type = 'padding', val = 1 },
-                    {
-                        type = 'group',
-                        val = function()
-                            return { mru(1, cdir, 9) }
-                        end,
-                        opts = {
-                            hl = pick_color(),
-                            shrink_margin = false
-                        },
-                    },
-                },
-            }
-
-            -- Buttons
-            local button = {
-                type = 'group',
-                val = {
-                    { type = 'text', val = 'Quick links', opts = { hl = pick_color(), position = 'center' } },
-                    { type = 'padding', val = 1 },
-                    dashboard.button('n', '  New File', ':ene <BAR> startinsert<CR>'),
-                    dashboard.button('r', 'ﭯ  Recent Files', ':lua require"telescope.builtin".oldfiles()<CR>'),
-                    dashboard.button('f', '  Find Files', ':Telescope find_files<CR>'),
-                    dashboard.button('g', '  Grep Code', ':Telescope live_grep<CR>'),
-                    dashboard.button('T', '  Terminal', ':ToggleTerm<CR>'),
-                    dashboard.button('S', '  Git Status', ':lua require("telescope.builtin").git_status()<CR>'),
-                    dashboard.button('C', '  Git Commits', ':lua require("telescope.builtin").git_commits()<CR>'),
-                    dashboard.button('t', '  Colorschemes', ':e ~/.config/nvim/lua/schemes/init.lua<CR>'),
-                    dashboard.button('u', '  Lazy Manager', ':Lazy check<CR>'),
-                    dashboard.button('n', '  Neovim Init', ':e ~/.config/nvim/init.lua<CR>'),
-                    dashboard.button('h', '  Neovim Health', ':checkhealth<CR>'),
-                    dashboard.button('q', '  Exit Neovim', ':qa<CR>'),
-                },
-                position = 'center',
-            }
-
-            -- Footer
-            local footer = function()
-                local datetime = os.date '  﨟%a %d,%b %y '
-                local version = ' nvim '
-                    .. vim.version().major
-                    .. '.'
-                    .. vim.version().minor
-                    .. '.'
-                    .. vim.version().patch
-                local lazy_ok, lazy = pcall(require, 'lazy')
-                if lazy_ok then
-                    local total_plugins = '   ' .. lazy.stats().count .. ' Plugins'
-                    return version .. total_plugins .. datetime
-                else
-                    return version
-                end
-            end
-
-            local footer = {
-                type = 'group',
-                val = {
-                    {
-                        type = 'text',
-                        val = footer(),
-                        opts = { hl = pick_color(), position = 'center' },
-                    },
-                },
-            }
-
-            local opts = {
-                layout = {
-                    { type = 'padding', val = 1 },
-                    header,
-                    { type = 'padding', val = 2 },
-                    recent,
-                    { type = 'padding', val = 2 },
-                    button,
-                    { type = 'padding', val = 2 },
-                    footer,
-                },
-                opts = { margin = 5 },
-            }
-
-            alpha.setup(opts)
-        end,
-    },
+		alpha.setup(opts)
+	end,
 }

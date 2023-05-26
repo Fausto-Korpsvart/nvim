@@ -4,6 +4,7 @@ local hl = vim.api.nvim_set_hl
 vim.cmd [[hi! CursorLine gui=bold]]
 hl(0, 'MsgArea', { bg = 'none', bold = true, fg = '#89ddff' })
 hl(0, 'ModeMsg', { bg = 'none', bold = true, fg = '#89ddff' })
+hl(0, 'WinSeparator', { bg = 'none', bold = true, fg = '#506d9b' }) -- #3d59a1 #414868 #506d9b #565f89 #6382bd
 hl(0, 'CursorLineNr', { bg = 'none', bold = true, fg = '#ff9e64' })
 
 -- Changes Sign
@@ -32,19 +33,15 @@ hl(0, 'HlSearchLens', { bg = 'none', fg = '#c099ff', bold = true, underline = tr
 hl(0, 'HlSearchFloat', { bg = 'none', fg = '#0db9d7', bold = true, underline = true })
 hl(0, 'HlSearchLensNear', { bg = 'none', fg = '#0db9d7', bold = true, underline = true })
 
--- LSP Illuminate
-hl(0, 'IlluminatedWordText', { bg = '#16161e', fg = 'none', bold = false, underline = false })
-hl(0, 'IlluminatedWordRead', { bg = 'none', fg = 'none', bold = false, underline = true })
-hl(0, 'IlluminatedWordWrite', { bg = 'none', fg = 'none', bold = false, underline = true })
-
 -- LSP Saga
-hl(0, 'SagaShadow', { bg = '#1e1e2e', blend = 50 })
+hl(0, 'SagaShadow', { bg = '#1e1e2e', blend = 40 })
 
--- Matchup
+-- -- Matchup
 hl(0, 'MatchParen', { bg = '#16161e', fg = '#ff9e64', bold = true, underline = false })
 hl(0, 'MatchParenCur', { bg = '#16161e', fg = '#ff9e64', bold = true, underline = false })
 hl(0, 'MatchWord', { bg = '#2a283d', fg = '#db4b4b', bold = true, underline = true })
 hl(0, 'MatchWordCur', { bg = '#2a283d', fg = '#db4b4b', bold = true, underline = true })
+hl(0, 'MatchBackground', { bg = '#0db9d7', fg = '#db4b4b', bold = true, underline = true })
 
 -- Neogit
 hl(0, 'NeogitNotificationInfo', { fg = '#6183bb' })
@@ -55,48 +52,6 @@ hl(0, 'NeogitDiffDeleteHighlight', { bg = 'none', fg = '#db4b4b' })
 hl(0, 'NeogitDiffContextHighlight', { bg = 'none', fg = '#1abc9c' })
 hl(0, 'NeogitHunkHeader', { bg = 'none', fg = '#ff9e64' })
 hl(0, 'NeogitHunkHeaderHighlight', { bg = 'none', fg = '#ff9e64' })
-
--- Neotree Disabled<[[[
--- hl(0, 'NeoTreeTabActive', { bg = '#2a283d', fg = '#0db9d7' })
--- hl(0, 'NeoTreeTabInactive', { bg = '#16161e', fg = '#a9b1d6' })
--- hl(0, 'NeoTreeTabInactive', { bg = '#16161e', fg = '#a9b1d6' })
--- hl(0, 'NeoTreeTabSeparatorActive', { bg = '#16161e', fg = '#16161e' })
--- hl(0, 'NeoTreeTabSeparatorInactive', { bg = '#16161e', fg = '#16161e' })
-
--- hl(0, 'NeoTreeNormal',      { bg = '#191726', fg = 'none' })
--- hl(0, 'NeoTreeTitleBar',    { bg = 'none',    fg = '#c099ff' })
--- hl(0, 'NeoTreeFloatNormal', { bg = '#191726', fg = '#c099ff' })
--- hl(0, 'NeoTreeFloatBorder', { bg = '#191726', fg = '#191726' })
--- hl(0, 'NeoTreeFloatTitle',  { bg = '#191726', fg = '#0db9d7' })
--- hl(0, 'NeoTreeStatusLine',  { bg = '#191726', fg = '#0db9d7' })]]]>
-
--- Notify
-hl(0, 'NotifyBackground', { bg = 'none', fg = '#1a1b26' })
-hl(0, 'NotifyINFOBorder', { bg = 'none', fg = '#1a1b26' })
-hl(0, 'NotifyERRORBorder', { bg = 'none', fg = '#1a1b26' })
-hl(0, 'NotifyWARNBorder', { bg = 'none', fg = '#1a1b26' })
-hl(0, 'NotifyTRACEBorder', { bg = 'none', fg = '#1a1b26' })
-hl(0, 'NotifyDEBUGBorder', { bg = 'none', fg = '#1a1b26' })
-hl(0, 'NotifyINFOBody', { bg = '#16161e', fg = 'none' })
-hl(0, 'NotifyERRORBody', { bg = '#16161e', fg = 'none' })
-hl(0, 'NotifyWARNBody', { bg = '#16161e', fg = 'none' })
-hl(0, 'NotifyTRACEBody', { bg = '#16161e', fg = 'none' })
-hl(0, 'NotifyDEBUGBody', { bg = '#16161e', fg = 'none' })
-
--- Sniprun
-hl(0, 'SniprunVirtualTextOk', { bg = '#191726', fg = '#0db9d7' })
-hl(0, 'SniprunVirtualTextErr', { bg = '#191726', fg = '#0db9d7' })
-
--- Telescope Disabled<[[[
--- hl(0, 'TelescopeNormal',        { bg = '#191726', fg = '#eae8ff' })
--- hl(0, 'TelescopePreviewNormal', { bg = '#191726', fg = '#eae8ff' })
--- hl(0, 'TelescopePromptNormal',  { bg = '#191726', fg = '#eae8ff' })
--- hl(0, 'TelescopeResultsNormal', { bg = '#191726', fg = '#eae8ff' })
--- hl(0, 'TelescopeBorder',        { bg = '#191726', fg = '#c099ff' })
--- hl(0, 'TelescopePromptBorder',  { bg = '#191726', fg = '#191726' })
--- hl(0, 'TelescopeResultsBorder', { bg = '#191726', fg = '#191726' })
--- hl(0, 'TelescopePreviewBorder', { bg = '#191726', fg = '#191726' })
--- ]]]>
 
 -- Todo Comments
 hl(0, 'TodoBgFIX', { bg = '#16161e', fg = '#db4b4b', bold = true })
@@ -114,18 +69,6 @@ hl(0, 'TodoFgTODO', { bg = 'none', fg = '#0db9d7', bold = true })
 hl(0, 'TodoFgWARN', { bg = 'none', fg = '#ffc777', bold = true })
 hl(0, 'TodoFgPERF', { bg = 'none', fg = '#bb9af7', bold = true })
 hl(0, 'TodoFgTEST', { bg = 'none', fg = '#3e68d7', bold = true })
-
--- Treesitter Rainbow
-hl(0, 'rainbowcol1', { fg = '#ff9e64' })
-hl(0, 'rainbowcol2', { fg = '#c099ff' })
-hl(0, 'rainbowcol3', { fg = '#0db9d7' })
-hl(0, 'rainbowcol4', { fg = '#c3e88d' })
-hl(0, 'rainbowcol5', { fg = '#ff007c' })
-hl(0, 'rainbowcol6', { fg = '#1abc9c' })
-hl(0, 'rainbowcol7', { fg = '#3e68d7' })
-
--- ScrollView
-hl(0, 'ScrollView', { bg = '#2d2a45', fg = 'none' })
 
 -- LSP VirtText
 hl(0, 'DiagnosticVirtualTextError', { bg = 'none', fg = '#f7768e', bold = true, underline = false })
