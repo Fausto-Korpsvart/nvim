@@ -1,6 +1,7 @@
 return {
 	-- https://github.com/VonHeikemen/lsp-zero.nvim
 	'VonHeikemen/lsp-zero.nvim',
+	branch = 'v2.x',
 	dependencies = {
 		'neovim/nvim-lspconfig',
 		'b0o/schemastore.nvim',
@@ -17,20 +18,26 @@ return {
 		},
 	},
 	config = function()
-		require('lsp-zero').preset 'lsp-only'
-
-		require('lsp-zero').set_preferences {
-			configure_diagnostics = true,
+		local lspzero = require('lsp-zero').preset {
+			name = 'lsp-ony',
+			float_border = 'single',
 			setup_servers_on_start = true,
+			call_servers = 'local',
 			suggest_lsp_servers = false,
+			configure_diagnostics = false,
 			cmp_capabilities = false,
 			manage_nvim_cmp = false,
 			set_lsp_keymaps = false,
-			call_servers = 'local',
-			sign_icons = { error = '•', warn = '•', hint = '•', info = '•' },
 		}
 
-		require('lsp-zero').on_attach(function(client, bufnr)
+		lspzero.set_sign_icons {
+			error = '•',
+			warn = '•',
+			hint = '•',
+			info = '•',
+		}
+
+		lspzero.on_attach(function(client, bufnr)
 			vim.notify(' LSP Loading: ' .. client.name)
 			local bufopt = { noremap = true, silent = true, buffer = bufnr }
 			local keymap = vim.keymap.set
@@ -50,18 +57,17 @@ return {
 			keymap('n', 'co', '<CMD>Lspsaga outgoing_calls<CR>', bufopt)
 			keymap('n', 'rn', '<CMD>Lspsaga rename<CR>', bufopt)
 			keymap('n', 'gI', '<CMD>lua vim.lsp.buf.implementation()<CR>', bufopt)
-			keymap('n', 'ff', '<CMD>LspZeroFormat<CR>', bufopt)
-			keymap('n', 'fr', '<CMD>LspZeroFormat<CR>', bufopt)
 			keymap({ 'n', 't' }, '<Leader>t', '<CMD>Lspsaga term_toggle<CR>', bufopt)
 			keymap('n', 'nf', function()
-				vim.lsp.buf.format { async = true }
+				vim.lsp.buf.format { async = true, timeout_ms = 10000 }
 			end, bufopt)
 			vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]]
 		end)
 
 		-- Languages Settings<[[[
+		local lspconfig = require 'lspconfig'
 		-- cssls <[[[
-		require('lsp-zero').configure('cssls', {
+		lspconfig.cssls.setup {
 			filename = {
 				'css',
 				'sass',
@@ -79,10 +85,10 @@ return {
 					},
 				},
 			},
-		})
+		}
 		-- ]]]>
 		-- eslint <[[[
-		require('lsp-zero').configure('eslint', {
+		lspconfig.eslint.setup {
 			filetype = {
 				'javascript',
 				'javascriptreact',
@@ -120,14 +126,12 @@ return {
 					mode = 'location',
 				},
 			},
-		})
+		}
 		-- ]]]>
 		-- jsonls <[[[
-		local status_ok, schemastore = pcall(require, 'schemastore')
-		if not status_ok then
-			return
-		end
-		require('lsp-zero').configure('jsonls', {
+		local schemastore = require 'schemastore'
+
+		lspconfig.jsonls.setup {
 			init_options = {
 				provideFormatter = false,
 			},
@@ -145,10 +149,10 @@ return {
 					},
 				},
 			},
-		})
+		}
 		-- ]]]>
 		-- pyright <[[[
-		require('lsp-zero').configure('pyright', {
+		lspconfig.pyright.setup {
 			settings = {
 				python = {
 					analysis = {
@@ -161,10 +165,10 @@ return {
 					},
 				},
 			},
-		})
+		}
 		-- ]]]>
 		-- lua_ls <[[[
-		require('lsp-zero').configure('lua_ls', {
+		lspconfig.lua_ls.setup {
 			settings = {
 				Lua = {
 					hint = {
@@ -181,10 +185,10 @@ return {
 					},
 				},
 			},
-		})
+		}
 		-- ]]]>
 		-- tsserver <[[[
-		require('lsp-zero').configure('tsserver', {
+		lspconfig.tsserver.setup {
 			settings = {
 				disable_formatting = true,
 				settings = {
@@ -212,25 +216,25 @@ return {
 					},
 				},
 			},
-		})
+		}
 		-- ]]]>
 		-- yamlls <[[[
-		require('lsp-zero').configure('yamlls', {
+		lspconfig.yamlls.setup {
 			yaml = {
 				schemaStore = {
 					enable = true,
 				},
 			},
-		})
+		}
 		-- ]]]>
 		-- ]]]>
 
-		require('lsp-zero').setup()
+		lspzero.setup()
 
 		vim.diagnostic.config {
 			virtual_text = {
-				source = 'never',
-				prefix = '•',
+				source = 'always', -- never|true|always|if_many
+				prefix = '',
 			},
 			signs = true,
 			underline = true,

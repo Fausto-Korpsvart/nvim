@@ -77,7 +77,7 @@ return {
 					changedelete = { text = '│' },
 					untracked = { text = '│' },
 				},
-				signcolumn = false,
+				signcolumn = true,
 				numhl = true,
 				trouble = true,
 				preview_config = { border = 'single' },
