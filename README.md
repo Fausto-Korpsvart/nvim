@@ -8,23 +8,27 @@
   	</p>
   </div>
 
-  > My simple configuration for the Neovim Code Editor.
+> My simple configuration for the Neovim Code Editor.
 
-**ALPHA**
-![Alpha](https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-01.png)
+**Package Manager**
+![Lazy Nvim](https://github.com/Fausto-Korpsvart/nvim/blob/main/screenshots/01-Lazy-Nvim.png)
 
 <details>
 <summary>More Screenshots</summary>
 	<p>
-		<b>NOICE + CMP</b>
-		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-03.png' />
-		<b>TELESCOPE</b>
-		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-06.png' />
+		<b>Alpha</b>
+		<img src='https://github.com/Fausto-Korpsvart/nvim/blob/main/screenshots/02-Alpha.png' />
+		<b>LSP Diagnostics</b>
+		<img src='https://github.com/Fausto-Korpsvart/nvim/blob/main/screenshots/03-LSP-Diagnostics.png' />
+		<b>LSP Saga</b>
+		<img src='https://github.com/Fausto-Korpsvart/nvim/blob/main/screenshots/04-LSP-Saga.png' />
+		<b>Telescope</b>
+		<img src='https://github.com/Fausto-Korpsvart/nvim/blob/main/screenshots/05-Telescope.png' />
 		<b>CMP</b>
-		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-02.png' />
-		<b>LSP SAGA</b>
-		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-04.png' />
-		<b>DIAGNOSTICS</b>
-		<img src='https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/screenshots/nvim-05.png' />
+		<img src='https://github.com/Fausto-Korpsvart/nvim/blob/main/screenshots/06-CMP.png' />
+		<b>Glow</b>
+		<img src='https://github.com/Fausto-Korpsvart/nvim/blob/main/screenshots/07-Glow.png' />
+		<b>Spectre</b>
+		<img src='https://github.com/Fausto-Korpsvart/nvim/blob/main/screenshots/08-Spectre.png' />
 	</p>
 </details>
