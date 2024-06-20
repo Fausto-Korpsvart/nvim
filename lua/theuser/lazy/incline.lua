@@ -2,6 +2,8 @@ return {
 	'b0o/incline.nvim',
 	event = 'BufReadPre',
 	config = function()
+		local color = require 'theuser.util.color'
+
 		require('incline').setup {
 			render = function(props)
 				-- Diagnostics{{{
@@ -135,39 +137,40 @@ return {
 				end
 				-- }}}
 
-				return { -- {{{
+				-- Calling {{{
+				return {
 					{
 						get_diagnostic_label(),
-						guibg = '#16161e',
+						guibg = color.black,
 					},
 					{
 						file_dir(),
-						guibg = '#16161e',
+						guibg = color.black,
 					},
 					{
 						search_count(),
-						guifg = '#7ca1f2',
-						guibg = '#16161e',
+						guifg = color.blue,
+						guibg = color.black,
 					},
 					{
 						spell_status(),
-						guifg = '#fca7ea',
-						guibg = '#16161e',
+						guifg = color.pink,
+						guibg = color.black,
 					},
 					{
 						tab_spaces(),
-						guifg = '#ff966c',
-						guibg = '#16161e',
+						guifg = color.orange,
+						guibg = color.black,
 					},
 					{
 						file_size(),
-						guifg = '#c099ff',
-						guibg = '#16161e',
+						guifg = color.purple,
+						guibg = color.black,
 					},
 					{
 						location(),
-						guifg = '#e26a75',
-						guibg = '#16161e',
+						guifg = color.red,
+						guibg = color.black,
 					},
 					--[[ {
 						buf_index(),

@@ -4,6 +4,11 @@ return {
 	event = 'VeryLazy',
 	cmd = 'Neotree',
 	config = function()
+		vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' }) --
+		vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })   -- 
+		vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })   -- 
+		vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
+
 		require('neo-tree').setup {
 			close_if_last_window = true,
 			popup_border_style = 'single',
@@ -38,15 +43,15 @@ return {
 				},
 				git_status = {
 					symbols = {
-						added = '󰐖',
-						deleted = '󰍵',
-						modified = '󰾟',
-						renamed = '󰏬',
-						staged = '󱗜',
-						unstaged = '󱗝',
-						untracked = '󰞋',
-						conflict = '󰱞',
-						ignored = '󰅗',
+						added = '󰐕',
+						deleted = '󰍴 ',
+						modified = '󰜥 ',
+						renamed = '󰲶 ',
+						staged = ' ',
+						unstaged = ' ',
+						untracked = ' ',
+						conflict = ' ',
+						ignored = ' ',
 					},
 				},
 				file_size = {
@@ -152,11 +157,8 @@ return {
 		vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
 
 		vim.keymap.set('n', '<Leader>nt', '<CMD>Neotree toggle<CR>')
-		vim.keymap.set('n', '<Leader>nf', '<CMD>Neotree toggle float<CR>')
 		vim.keymap.set('n', '<Leader>nc', '<CMD>Neotree close<CR>')
 		vim.keymap.set('n', '<Leader>bf', '<CMD>Neotree toggle show buffers<CR>')
 		vim.keymap.set('n', '<Leader>gs', '<CMD>Neotree git_status<CR>')
-		vim.keymap.set('n', '<Leader>dg', '<CMD>Neotree diagnostics<CR>')
-		vim.keymap.set('n', '<Leader>ds', '<CMD>Neotree document_symbols<CR>')
 	end,
 }

@@ -4,7 +4,7 @@ return {
 	config = function()
 		-- Variables
 		local alpha = require 'alpha'
-		local color_pick = require('theuser').color_picker()
+		local color_pick = require('theuser.util').color_picker()
 		local Terminal = require('toggleterm.terminal').Terminal
 		local lazygit = Terminal:new { cmd = 'lazygit', direction = 'float', hidden = true }
 		function Lazygit_toggle() lazygit:toggle() end
@@ -64,12 +64,12 @@ return {
 				button('r', '  Recent Files', '<CMD>Telescope oldfiles<CR>'),
 				button('f', '  Find Files', '<CMD>Telescope find_files<CR>'),
 				button('c', '󰔎  Colorschemes', '<CMD>e ~/.config/nvim/lua/theuser/lazy/colorschemes.lua<CR>'),
-				button('t', '  Terminal', '<CMD>ToggleTerm<CR>'),
+				button('t', '  Terminal', '<CMD>ToggleTerm<CR>'),
 				button('g', '  Lazy Git', '<CMD>lua Lazygit_toggle()<CR>'),
-				button('p', '  Lazy Init', '<CMD>e ~/.config/nvim/lua/theuser/lazy/init.lua<CR>'),
-				button('l', '󰂙  Lazy Manager', '<CMD>Lazy check<CR>'),
+				button('l', '  Lazy Manager', '<CMD>Lazy check<CR>'),
 				button('m', '󰪩  Mason Manager', '<CMD>Mason<CR>'),
-				button('i', '  Neovim Init', '<CMD>e ~/.config/nvim/lua/theuser/init.lua<CR>'),
+				button('p', '  Neovim Packs', '<CMD>e ~/.config/nvim/lua/theuser/lazy/init.lua<CR>'), --   󰏓
+				button('u', '󱁼  Neovim Utils', '<CMD>e ~/.config/nvim/lua/theuser/util/init.lua<CR>'),
 				button('h', '󰗶  Neovim Health', '<CMD>checkhealth<CR>'),
 				button('q', '󰩈  Neovim Quit', '<CMD>qa<CR>'),
 			}

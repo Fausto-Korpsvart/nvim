@@ -24,11 +24,11 @@ require('lazy').setup {
 	ui = {
 		border = 'single',
 		title = ' Plugin Manager ',
-		title_pos = 'center',
+		title_pos = 'right',
 		size = { width = 0.85, height = 0.85 },
 	},
 	keys = {
 		vim.keymap.set('n', '<Leader>lz', '<CMD>Lazy update<CR>'),
-		vim.keymap.set('n', '<Leader>tl', '<CMD>lua require("lazy.util").float_term()<CR>'),
+		vim.keymap.set('n', '<Leader>ft', '<CMD>lua require("lazy.util").float_term()<CR>'),
 	},
 }

@@ -63,7 +63,7 @@ local options = {
 		W = true,
 	}, -- }}}
 	showtabline = 0,
-	-- sidescrolloff = 20,
+	sidescrolloff = 20,
 	signcolumn = 'auto', -- yes:1|number|auto
 	smartindent = false,
 	smoothscroll = true,
@@ -102,6 +102,7 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.markdown_recommended_style = 0
 vim.cmd [[set iskeyword+=-]]
+vim.cmd 'set scroll=1'
 -- vim.cmd 'set wildchar=<C-k>'
 -- Desabled Builtins{{{
 local builtins = {

@@ -20,7 +20,7 @@ require('conform').setup {
 
 	formatters = {
 		markdownlint = {
-			command = 'markdownlint',
+			command = 'mdformat',
 			args = { '--fix', '$FILENAME' },
 			exit_codes = { 0, 1 },
 			stdin = false,
@@ -52,7 +52,7 @@ require('conform').setup {
 		json = { { 'prettier', 'prettierd' } },
 		jsonc = { { 'prettier', 'prettierd' } },
 		lua = { 'stylua' },
-		markdown = { { 'markdownlint', 'prettier' } },
+		markdown = { { 'mdformat', 'prettier' } },
 		python = { 'isort', 'black' },
 		scss = { { 'prettier', 'prettierd' } },
 		sh = { 'shfmt' },

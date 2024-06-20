@@ -7,6 +7,8 @@ local keymap = function(mode, lhs, rhs, desc)
 	})
 end
 
+-- local discipline = require('theuser.util').nvim_discipline()
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -19,18 +21,12 @@ keymap('n', 'Q', '<nop>', 'Disable registring with Q')
 -- }}}
 
 -- Centered Navigation{{{
-keymap('n', '<C-d>', '<C-e>', 'Centered Cursor on Screen')
-keymap('n', '<C-u>', '<C-y>', 'Centered Cursor on Screen')
-keymap('n', '<C-y>', '<C-u>zz', 'Centered Cursor on Screen')
-keymap('n', '<C-e>', '<C-d>zz', 'Centered Cursor on Screen')
-keymap('n', '{', '{zz', 'Centered Cursor on Screen')
-keymap('n', '}', '}zz', 'Centered Cursor on Screen')
-keymap('n', 'N', 'Nzz', 'Centered Cursor on Screen')
-keymap('n', 'n', 'nzz', 'Centered Cursor on Screen')
-keymap('n', 'G', 'Gzz', 'Centered Cursor on Screen')
-keymap('n', 'gg', 'ggzz', 'Centered Cursor on Screen')
-keymap('n', '<C-i>', '<C-i>zz', 'Centered Cursor on Screen')
-keymap('n', '<C-o>', '<C-o>zz', 'Centered Cursor on Screen')
+-- keymap({ 'n', 'v', 'x' }, '<C-d>', '<C-e>', 'Centered Cursor on Screen')
+-- keymap({ 'n', 'v', 'x' }, '<C-u>', '<C-y>', 'Centered Cursor on Screen')
+-- keymap({ 'n', 'v', 'x' }, '<C-e>', '1<C-d>zz', 'Centered Cursor on Screen')
+-- keymap({ 'n', 'v', 'x' }, '<C-y>', '1<C-u>zz', 'Centered Cursor on Screen')
+keymap({ 'n', 'v', 'x' }, '<C-d>', '1<C-d>zz', 'Centered Cursor on Screen')
+keymap({ 'n', 'v', 'x' }, '<C-u>', '1<C-u>zz', 'Centered Cursor on Screen')
 keymap('n', '%', '%zz', 'Centered Cursor on Screen')
 keymap('n', '*', '*zz', 'Centered Cursor on Screen')
 keymap('n', '#', '#zz', 'Centered Cursor on Screen')

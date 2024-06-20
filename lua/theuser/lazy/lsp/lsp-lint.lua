@@ -21,4 +21,16 @@ vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
 	callback = function() require('lint').try_lint() end,
 })
 
-vim.keymap.set('n', 'tl', function() require('lint').try_lint() end)
+local lint = false
+local toggle_lint = function()
+	if lint == true then
+		lint = false
+		vim.diagnostic.reset(nil, 0)
+	else
+		lint = true
+		require('lint').try_lint()
+	end
+end
+vim.keymap.set({ 'n' }, '<Leader>lt', toggle_lint, { noremap = true, desc = 'Lint' })
+
+-- vim.keymap.set('n', '<Leader>lti', function() require('lint').try_lint() end)

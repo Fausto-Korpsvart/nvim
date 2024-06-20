@@ -160,7 +160,19 @@ return {
 		event = 'VeryLazy',
 		config = function()
 			require('hardtime').setup {
+				enabled = true,
+				max_time = 2000,
+				max_count = 4,
 				disable_mouse = false,
+				hint = true,
+				notification = false,
+				allow_different_key = false,
+				disabled_keys = {
+					['<Up>'] = {},
+					['<Down>'] = {},
+					['<Left>'] = {},
+					['<Right>'] = {},
+				},
 				disabled_filetypes = {
 					'plenary',
 					'TelescopePrompt',
@@ -184,15 +196,10 @@ return {
 					'nui',
 					'Outline',
 				},
-				disabled_keys = {
-					['<Up>'] = {},
-					['<Down>'] = {},
-					['<Left>'] = {},
-					['<Right>'] = {},
-				},
 			}
 		end,
 		vim.keymap.set('n', '<Leader>ht', '<CMD>Hardtime toggle<CR>'),
+		vim.keymap.set('n', '<Leader>htr', '<CMD>Hardtime report<CR>'),
 	},
 
 	{
@@ -363,6 +370,18 @@ return {
 	},
 
 	{
+		'tris203/precognition.nvim',
+		event = 'VeryLazy',
+		config = function()
+			require('precognition').setup {
+				startVisible = false,
+				showBlankVirtLine = true,
+				highlightColor = { link = 'Comment' },
+			}
+			vim.keymap.set('n', '<Leader>pc', '<CMD>Precognition toggle<CR>')
+		end,
+	},
+	{
 		'dstein64/nvim-scrollview',
 		event = 'VimEnter',
 		init = function()
@@ -416,30 +435,6 @@ return {
 			vim.keymap.set('n', 'sc', '<Plug>SnipClose')
 			vim.keymap.set('n', 'sro', '<Plug>SnipRunOperator')
 			vim.keymap.set('v', 'sro', '<Plug>SnipRunOperator')
-		end,
-	},
-
-	{
-		'cshuaimin/ssr.nvim',
-		event = 'VeryLazy',
-		config = function()
-			require('ssr').setup {
-				border = 'single',
-				min_width = 50,
-				min_height = 5,
-				max_width = 120,
-				max_height = 25,
-				adjust_window = true,
-				keymaps = {
-					close = 'q',
-					next_match = 'n',
-					prev_match = 'N',
-					replace_confirm = '<cr>',
-					replace_all = '<leader><cr>',
-				},
-			}
-
-			vim.keymap.set({ 'n', 'x' }, '<leader>sr', function() require('ssr').open() end)
 		end,
 	},
 
@@ -501,7 +496,6 @@ return {
 		version = '*',
 		config = function()
 			require('toggleterm').setup {
-				-- size = 15,
 				size = function(term)
 					if term.direction == 'horizontal' then
 						return 15
@@ -535,12 +529,12 @@ return {
 
 			require('todo-comments').setup {
 				keywords = {
-					FIX = { icon = '', color = fix },
-					HACK = { icon = '', color = hack },
-					NOTE = { icon = '󱇗', color = note },
-					PERF = { icon = '󰾅', color = perf },
 					TODO = { icon = '', color = todo },
+					NOTE = { icon = '󱇗', color = note },
+					FIXX = { icon = '', color = fix },
+					HACK = { icon = '', color = hack },
 					WARN = { icon = '', color = warn },
+					PERF = { icon = '󰾅', color = perf },
 					TEST = { icon = '󰙨', color = test },
 				},
 			}
@@ -622,7 +616,6 @@ return {
 		'mg979/vim-visual-multi',
 		branch = 'master',
 		event = 'BufEnter',
-		mame = 'multicursor',
 		init = function()
 			vim.g.VM_mouse_mappings = 1
 			vim.g.VM_theme_set_by_colorscheme = 1
@@ -655,15 +648,15 @@ return {
 				['Shrink'] = '_',
 				['Enlarge'] = '+',
 				['Start Regex Search'] = 'sr',
-				['Visual Find'] = 'f',
+				['Visual Find'] = 'vf',
 				['Visual Cursors'] = 'C',
 				-- Menu
 				['Case Conversion Menu'] = 'cc',
 				['Search Menu'] = 'ss',
 				-- Toogles
-				-- ['Toggle Block'] = '<BS>',
-				-- ['Toggle Single Region'] = '<CR>',
-				-- ['Toggle Multiline'] = 'M',
+				['Toggle Block'] = '<BS>',
+				['Toggle Single Region'] = '<CR>',
+				['Toggle Multiline'] = 'M',
 			}
 		end,
 	},

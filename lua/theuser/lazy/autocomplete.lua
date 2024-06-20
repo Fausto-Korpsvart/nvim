@@ -112,7 +112,7 @@ return {
 					require('cmp').mapping.select_next_item(cmp_select),
 					{ 'i', 'c', 's' }
 				),
-				['<C-y>'] = cmp.mapping(
+				['<C-s>'] = cmp.mapping(
 					require('cmp').mapping.confirm { select = true },
 					{ 'i', 'c' }
 				),
@@ -178,14 +178,14 @@ return {
 					col_offset = 0,
 					side_padding = 0,
 					scrollbar = false,
-					winhighlight = 'FloatBorder:CursorLineNr,CursorLine:CmpItemKindUnit',
+					winhighlight = 'FloatBorder:NormalFloat,CursorLine:CursorLine',
 				},
 				documentation = {
 					border = 'single',
 					col_offset = 0,
 					side_padding = 0,
 					scrollbar = false,
-					winhighlight = 'FloatBorder:CursorLineNr',
+					winhighlight = 'FloatBorder:NormalFloat',
 				},
 			},
 
