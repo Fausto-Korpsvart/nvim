@@ -7,3 +7,9 @@
           <img src='https://img.shields.io/badge/Code-Lua-informational?style=for-the-badge&logo=lua&logoColor=02027d&color=02027d'/>
       </p>
   </div>
+
+![Alpha Desktop](https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/misc/neovim-01.png)
+![Trouble nvim](https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/misc/neovim-02.png)
+![Mini Files](https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/misc/neovim-03.png)
+![LSP Glance](https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/misc/neovim-04.png)
+![Fugit2](https://raw.githubusercontent.com/Fausto-Korpsvart/nvim/main/misc/neovim-05.png)
