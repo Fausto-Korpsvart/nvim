@@ -38,12 +38,12 @@ return {
 					if vim.api.nvim_buf_get_option(props.buf, 'modified') then
 						filedir = filedir
 						filename = filename
-						icon = icon .. '  󰆓'
+						icon = icon .. '  󰆓 '
 					end
 
 					return {
 						{ '  ', filedir },
-						{ ' ▸ ', filename, ' ', icon, guifg = color },
+						{ ' 󰑃  ', filename, ' ', icon, guifg = color }, --   ⯈ ▶
 					}
 				end
 				-- }}}

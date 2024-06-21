@@ -12,12 +12,27 @@ return {
 		-- Header
 		local function getHeader()
 			local header = {
-				[[                               __                ]],
-				[[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-				[[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-				[[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-				[[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-				[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+
+				[[                                                 ]],
+				[[                                 ''              ]],
+				[[  `||''|,  .|''|, .|''|, \\  //  ||  '||),,(|,   ]],
+				[[   ||  ||  ||..|| ||  ||  \\//   ||   || || ||   ]],
+				[[  .||  ||. `|...  `|..|'   \/   .||. .||    ||.  ]],
+
+				-- MORE HEADERS{{{
+				-- [[ 0110111011001010110111101110110110100101101101  ]],
+
+				-- [[                               __                ]],
+				-- [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
+				-- [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+				-- [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+				-- [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+				-- [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+
+				-- [[         •    ]],
+				-- [[ ┏┓┏┓┏┓┓┏┓┏┳┓ ]],
+				-- [[ ┛┗┗ ┗┛┗┛┗┛┗┗ ]],
+				-- }}}
 			}
 
 			return {
@@ -63,13 +78,25 @@ return {
 			local buttons = {
 				button('r', '  Recent Files', '<CMD>Telescope oldfiles<CR>'),
 				button('f', '  Find Files', '<CMD>Telescope find_files<CR>'),
-				button('c', '󰔎  Colorschemes', '<CMD>e ~/.config/nvim/lua/theuser/lazy/colorschemes.lua<CR>'),
+				button(
+					'c',
+					'󰔎  Colorschemes',
+					'<CMD>e ~/.config/nvim/lua/theuser/lazy/colorschemes.lua<CR>'
+				),
 				button('t', '  Terminal', '<CMD>ToggleTerm<CR>'),
 				button('g', '  Lazy Git', '<CMD>lua Lazygit_toggle()<CR>'),
 				button('l', '  Lazy Manager', '<CMD>Lazy check<CR>'),
 				button('m', '󰪩  Mason Manager', '<CMD>Mason<CR>'),
-				button('p', '  Neovim Packs', '<CMD>e ~/.config/nvim/lua/theuser/lazy/init.lua<CR>'), --   󰏓
-				button('u', '󱁼  Neovim Utils', '<CMD>e ~/.config/nvim/lua/theuser/util/init.lua<CR>'),
+				button(
+					'p',
+					'  Neovim Packs',
+					'<CMD>e ~/.config/nvim/lua/theuser/lazy/init.lua<CR>'
+				), --   󰏓
+				button(
+					'u',
+					'󱁼  Neovim Utils',
+					'<CMD>e ~/.config/nvim/lua/theuser/util/init.lua<CR>'
+				),
 				button('h', '󰗶  Neovim Health', '<CMD>checkhealth<CR>'),
 				button('q', '󰩈  Neovim Quit', '<CMD>qa<CR>'),
 			}
@@ -111,7 +138,7 @@ return {
 				return greetingsTable[greetingIndex] .. ', ' .. name
 			end
 
-			local userName = 'f.korpsvart 󰙊'
+			local userName = 'f.korpsvart 󰙊' --
 			local greeting = greetHead(userName)
 
 			return {
@@ -127,11 +154,11 @@ return {
 		-- Footer
 		local function getFooter()
 			local stats = require('lazy').stats()
-			local total = '󰏗 Total.' .. stats.count
-			local load = 'Load.' .. stats.loaded .. ' 󰞑'
+			local total = 'Total.' .. stats.count -- 󰏖
+			local load = 'Loaded.' .. stats.loaded -- .. ''
 			local date = os.date '%a.%d.%b 󰸗'
-			local vers = ' ' .. vim.version().major .. '.' .. vim.version().minor
-			local info_string = vers .. ' | ' .. total .. ' | ' .. load .. ' | ' .. date
+			local vers = ' ' .. vim.version().major .. '.' .. vim.version().minor
+			local info_string = vers .. ' │ ' .. total .. ' │ ' .. load .. ' │ ' .. date
 
 			return {
 				type = 'text',

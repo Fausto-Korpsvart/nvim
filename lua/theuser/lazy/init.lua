@@ -195,6 +195,7 @@ return {
 					'Fugit2Graph',
 					'nui',
 					'Outline',
+					'minifiles',
 				},
 			}
 		end,

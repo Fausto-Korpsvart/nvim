@@ -20,7 +20,7 @@ function M.color_picker()
 	return colors[math.random(#colors)]
 end
 
--- Discipline
+-- Discipline{{{
 -- Based on https://github.com/craftzdog/dotfiles-public/blob/master/.config/nvim/lua/craftzdog/discipline.lua
 -- function M.nvim_discipline()
 -- 	local id
@@ -50,6 +50,7 @@ end
 -- 		end, { expr = true, silent = true })
 -- 	end
 -- end
+-- }}}
 
 -- Quick Notes
 -- Based on https://github.com/theopn/theovim

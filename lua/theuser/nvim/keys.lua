@@ -21,20 +21,20 @@ keymap('n', 'Q', '<nop>', 'Disable registring with Q')
 -- }}}
 
 -- Centered Navigation{{{
--- keymap({ 'n', 'v', 'x' }, '<C-d>', '<C-e>', 'Centered Cursor on Screen')
--- keymap({ 'n', 'v', 'x' }, '<C-u>', '<C-y>', 'Centered Cursor on Screen')
--- keymap({ 'n', 'v', 'x' }, '<C-e>', '1<C-d>zz', 'Centered Cursor on Screen')
--- keymap({ 'n', 'v', 'x' }, '<C-y>', '1<C-u>zz', 'Centered Cursor on Screen')
 keymap({ 'n', 'v', 'x' }, '<C-d>', '1<C-d>zz', 'Centered Cursor on Screen')
 keymap({ 'n', 'v', 'x' }, '<C-u>', '1<C-u>zz', 'Centered Cursor on Screen')
 keymap('n', '%', '%zz', 'Centered Cursor on Screen')
 keymap('n', '*', '*zz', 'Centered Cursor on Screen')
 keymap('n', '#', '#zz', 'Centered Cursor on Screen')
+-- keymap({ 'n', 'v', 'x' }, '<C-d>', '<C-e>', 'Centered Cursor on Screen')
+-- keymap({ 'n', 'v', 'x' }, '<C-u>', '<C-y>', 'Centered Cursor on Screen')
+-- keymap({ 'n', 'v', 'x' }, '<C-e>', '1<C-d>zz', 'Centered Cursor on Screen')
+-- keymap({ 'n', 'v', 'x' }, '<C-y>', '1<C-u>zz', 'Centered Cursor on Screen')
 -- }}}
 
 -- Managing Buffers & Tabs{{{
-keymap('n', '<leader>p', '<CMD>bp<CR>', 'Buffer Prev')
-keymap('n', '<leader>n', '<CMD>bn<CR>', 'Buffer Next')
+-- keymap('n', '<leader>p', '<CMD>bp<CR>', 'Buffer Prev')
+-- keymap('n', '<leader>n', '<CMD>bn<CR>', 'Buffer Next')
 
 keymap('n', '<C-h>', '<C-w>h', 'Move to Buffer Left')
 keymap('n', '<C-j>', '<C-w>j', 'Move to Buffer Down')
@@ -51,12 +51,12 @@ keymap('n', 'sh', '<C-w>s', 'Horizontal Buffs')
 -- }}}
 
 -- Moving Code{{{
-keymap('v', '>', '>gv', 'Indenting Code to Right')
-keymap('v', '<', '<gv', 'Indenting Code to Left')
-keymap('n', 'K', ':move .-2<CR>==', 'Moving Code Up Normal Mode')
-keymap('n', 'J', ':move .+1<CR>==', 'Moving Code Down Normal Mode')
-keymap('x', 'K', ":move '<-2<CR>gv-gv", 'Moving Code Up Visual Mode')
-keymap('x', 'J', ":move '>+1<CR>gv-gv", 'Moving Code Down Visual Mode')
+-- keymap('v', '>', '>gv', 'Indenting Code to Right')
+-- keymap('v', '<', '<gv', 'Indenting Code to Left')
+-- keymap('n', 'K', ':move .-2<CR>==', 'Moving Code Up Normal Mode')
+-- keymap('n', 'J', ':move .+1<CR>==', 'Moving Code Down Normal Mode')
+-- keymap('x', 'K', ":move '<-2<CR>gv-gv", 'Moving Code Up Visual Mode')
+-- keymap('x', 'J', ":move '>+1<CR>gv-gv", 'Moving Code Down Visual Mode')
 -- }}}
 
 -- Text Editing{{{
@@ -74,10 +74,10 @@ keymap('v', 'P', 'pgv<ESC>', 'Cursor at the bottom after paste')
 
 keymap('v', '<Leader>fr', 'gq', 'Range Formatting')
 keymap('n', '<Leader>fl', 'gqq', 'Line Formatting')
-keymap('v', '<Leader>fcc', 'gqap', 'Format paragraph at colorcolumn')
+keymap('v', '<Leader>fp', 'gqap', 'Format paragraph at colorcolumn')
 
-keymap('n', 'H', '^<ESC>', 'Go to beginning of line')
-keymap('n', 'L', '$<ESC>', 'Go to end of line')
+keymap('n', '<C-[>', '^<ESC>', 'Go to beginning of line')
+keymap('n', '<C-]>', '$<ESC>', 'Go to end of line')
 
 keymap('v', '`', 'u', 'Change to Lowercase')
 keymap('v', '<A-`>', 'U', 'Change to Uppercase')

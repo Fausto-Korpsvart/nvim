@@ -164,14 +164,10 @@ function ColorConfig(color)
 	hl(0, 'GlanceListFilename', { bg = colors.bg_alt, fg = colors.yellow })
 	hl(0, 'GlanceListFilepath', { bg = colors.bg_alt, fg = colors.yellow })
 	hl(0, 'GlanceListCount', { bg = colors.bg_alt, fg = colors.yellow })
-	hl(
-		0,
-		'GlanceListMatch',
-		{ bg = colors.bg_alt, fg = colors.cyan_alt, bold = true, underline = true }
-	)
+	hl(0, 'GlanceListMatch', { bg = colors.bg_alt, fg = colors.cyan_alt, bold = true, underline = true })
 	hl(0, 'GlanceListCursorLine', { bg = colors.black, fg = 'none', bold = true })
 	hl(0, 'GlanceListEndOfBuffer', { bg = colors.bg_alt, fg = 'none' })
-	hl(0, 'GlanceListBorderBottom', { bg = colors.bg_alt, fg = colors.cyan_alt })
+	hl(0, 'GlanceListBorderBottom', { bg = colors.black, fg = colors.cyan_alt })
 	hl(0, 'GlanceFoldIcon', { bg = colors.bg_alt, fg = 'none' })
 	hl(0, 'GlanceIndent', { bg = colors.bg_alt, fg = 'none' })
 	-- }}}

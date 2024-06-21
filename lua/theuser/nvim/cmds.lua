@@ -50,16 +50,6 @@ autocmd('filetype', {
 	end,
 })
 
-autocmd({ 'BufRead', 'BufNewFile', 'FileType' }, {
-	desc = 'Check Spell In Some File',
-	group = augroup 'check_spell',
-	pattern = { '*.gitcommit', '*.txt', '*.md', '*.text' },
-	callback = function()
-		vim.opt_local.spell = true
-		vim.opt_local.wrap = true
-	end,
-})
-
 autocmd('VimResized', {
 	desc = 'Equalize Splits',
 	group = augroup 'resize_splits',
@@ -75,18 +65,6 @@ autocmd('FileType', {
 		vim.cmd.wincmd 'L'
 		vim.cmd.wincmd '='
 	end,
-})
-
-autocmd('InsertLeave', {
-	desc = 'Turn off paste mode when leaving insert',
-	pattern = '*',
-	command = 'set nopaste',
-})
-
-autocmd('FileType', {
-	desc = 'Disable concealing in some files',
-	pattern = { 'json', 'jsonc', 'markdown' },
-	callback = function() vim.opt.conceallevel = 0 end,
 })
 
 -- Plugins
